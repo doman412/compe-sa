@@ -1,0 +1,212 @@
+-----------------------------------------------------------------------------------------
+ Copyright © 2010, Xilinx, Inc.
+ This file contains confidential and proprietary information of Xilinx, Inc. and is
+ protected under U.S. and international copyright and other intellectual property laws.
+-----------------------------------------------------------------------------------------
+
+ Disclaimer:
+ This disclaimer is not a license and does not grant any rights to the materials
+ distributed herewith. Except as otherwise provided in a valid license issued to
+ you by Xilinx, and to the maximum extent permitted by applicable law: (1) THESE
+ MATERIALS ARE MADE AVAILABLE "AS IS" AND WITH ALL FAULTS, AND XILINX HEREBY
+ DISCLAIMS ALL WARRANTIES AND CONDITIONS, EXPRESS, IMPLIED, OR STATUTORY,
+ INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, NON-INFRINGEMENT,
+ OR FITNESS FOR ANY PARTICULAR PURPOSE; and (2) Xilinx shall not be liable
+ (whether in contract or tort, including negligence, or under any other theory
+ of liability) for any loss or damage of any kind or nature related to, arising
+ under or in connection with these materials, including for any direct, or any
+ indirect, special, incidental, or consequential loss or damage (including loss
+ of data, profits, goodwill, or any type of loss or damage suffered as a result
+ of any action brought by a third party) even if such damage or loss was
+ reasonably foreseeable or Xilinx had been advised of the possibility of the same.
+
+ CRITICAL APPLICATIONS
+ Xilinx products are not designed or intended to be fail-safe, or for use in any
+ application requiring fail-safe performance, such as life-support or safety
+ devices or systems, Class III medical devices, nuclear facilities, applications
+ related to the deployment of airbags, or any other applications that could lead
+ to death, personal injury, or severe property or environmental damage
+ (individually and collectively, "Critical Applications"). Customer assumes the
+ sole risk and liability of any use of Xilinx products in Critical Applications,
+ subject only to applicable laws and regulations governing limitations on product
+ liability.
+
+ THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS PART OF THIS FILE AT ALL TIMES.
+
+-----------------------------------------------------------------------------------------
+
+ROM_form.vhd
+
+Nick Sawyer and Ken Chapman (Xilinx Ltd) 19th March 2010.
+
+This is the Verilog template file for the KCPSM3 assembler.
+It is used to configure an 18K Block Memory (BRAM) in Spartan-3 generation, Spartan-6,
+Virtex-II, Virtex-4 or Virtex-6 devices to act as a single port program ROM.
+
+This Verilog file is not valid as input directly into a synthesis or simulation tool.
+The assembler will read this template and insert the data required to complete the 
+definition of program ROM and write it out to a new '.v' file associated with the 
+name of the original '.psm' file being assembled.
+
+This template can be modified to define alternative memory definitions such as dual port.
+However, you are responsible for ensuring the template is correct as the assembler does 
+not perform any checking of the Verilog.
+
+The assembler identifies all text enclosed by {} characters, and replaces these
+character strings. All templates should include these {} character strings for 
+the assembler to work correctly. 
+
+****************************************************************************************
+	
+This template defines a block RAM configured in 1024 x 18-bit single port mode and 
+connected to act as a single port ROM.
+
+****************************************************************************************
+
+The next line is used to determine where the template actually starts and must exist.
+
+{begin template}
+//
+//////////////////////////////////////////////////////////////////////////////////
+// Copyright © 2010, Xilinx, Inc.
+// This file contains confidential and proprietary information of Xilinx, Inc. and is
+// protected under U.S. and international copyright and other intellectual property laws.
+//////////////////////////////////////////////////////////////////////////////////
+//
+// Disclaimer:
+// This disclaimer is not a license and does not grant any rights to the materials
+// distributed herewith. Except as otherwise provided in a valid license issued to
+// you by Xilinx, and to the maximum extent permitted by applicable law: (1) THESE
+// MATERIALS ARE MADE AVAILABLE "AS IS" AND WITH ALL FAULTS, AND XILINX HEREBY
+// DISCLAIMS ALL WARRANTIES AND CONDITIONS, EXPRESS, IMPLIED, OR STATUTORY,
+// INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, NON-INFRINGEMENT,
+// OR FITNESS FOR ANY PARTICULAR PURPOSE; and (2) Xilinx shall not be liable
+// (whether in contract or tort, including negligence, or under any other theory
+// of liability) for any loss or damage of any kind or nature related to, arising
+// under or in connection with these materials, including for any direct, or any
+// indirect, special, incidental, or consequential loss or damage (including loss
+// of data, profits, goodwill, or any type of loss or damage suffered as a result
+// of any action brought by a third party) even if such damage or loss was
+// reasonably foreseeable or Xilinx had been advised of the possibility of the same.
+//
+// CRITICAL APPLICATIONS
+// Xilinx products are not designed or intended to be fail-safe, or for use in any
+// application requiring fail-safe performance, such as life-support or safety
+// devices or systems, Class III medical devices, nuclear facilities, applications
+// related to the deployment of airbags, or any other applications that could lead
+// to death, personal injury, or severe property or environmental damage
+// (individually and collectively, "Critical Applications"). Customer assumes the
+// sole risk and liability of any use of Xilinx products in Critical Applications,
+// subject only to applicable laws and regulations governing limitations on product
+// liability.
+//
+// THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS PART OF THIS FILE AT ALL TIMES.
+//
+//////////////////////////////////////////////////////////////////////////////////
+//
+// Definition of a single port ROM for KCPSM3 program defined by {name}.psm
+//
+// Generated by KCPSM3 Assembler {timestamp}. 
+//
+//////////////////////////////////////////////////////////////////////////////////
+//
+//
+`timescale 1 ps / 1ps
+//
+module {name} (
+input   [9:0] address,
+input         clk,
+output [17:0] instruction );
+//
+RAMB16_S18 	#(
+      .INIT_00(256'h{INIT_00}),
+      .INIT_01(256'h{INIT_01}),	
+      .INIT_02(256'h{INIT_02}),	
+      .INIT_03(256'h{INIT_03}),	
+      .INIT_04(256'h{INIT_04}),	
+      .INIT_05(256'h{INIT_05}),	
+      .INIT_06(256'h{INIT_06}),	
+      .INIT_07(256'h{INIT_07}),	
+      .INIT_08(256'h{INIT_08}),	
+      .INIT_09(256'h{INIT_09}),	
+      .INIT_0A(256'h{INIT_0A}),	
+      .INIT_0B(256'h{INIT_0B}),	
+      .INIT_0C(256'h{INIT_0C}),	
+      .INIT_0D(256'h{INIT_0D}),	
+      .INIT_0E(256'h{INIT_0E}),	
+      .INIT_0F(256'h{INIT_0F}),	
+      .INIT_10(256'h{INIT_10}),	
+      .INIT_11(256'h{INIT_11}),	
+      .INIT_12(256'h{INIT_12}),	
+      .INIT_13(256'h{INIT_13}),	
+      .INIT_14(256'h{INIT_14}),	
+      .INIT_15(256'h{INIT_15}),	
+      .INIT_16(256'h{INIT_16}),	
+      .INIT_17(256'h{INIT_17}),	
+      .INIT_18(256'h{INIT_18}),	
+      .INIT_19(256'h{INIT_19}),	
+      .INIT_1A(256'h{INIT_1A}),	
+      .INIT_1B(256'h{INIT_1B}),	
+      .INIT_1C(256'h{INIT_1C}),	
+      .INIT_1D(256'h{INIT_1D}),	
+      .INIT_1E(256'h{INIT_1E}),	
+      .INIT_1F(256'h{INIT_1F}),	
+      .INIT_20(256'h{INIT_20}),	
+      .INIT_21(256'h{INIT_21}),	
+      .INIT_22(256'h{INIT_22}),	
+      .INIT_23(256'h{INIT_23}),	
+      .INIT_24(256'h{INIT_24}),	
+      .INIT_25(256'h{INIT_25}),	
+      .INIT_26(256'h{INIT_26}),	
+      .INIT_27(256'h{INIT_27}),	
+      .INIT_28(256'h{INIT_28}),	
+      .INIT_29(256'h{INIT_29}),	
+      .INIT_2A(256'h{INIT_2A}),	
+      .INIT_2B(256'h{INIT_2B}),	
+      .INIT_2C(256'h{INIT_2C}),	
+      .INIT_2D(256'h{INIT_2D}),	
+      .INIT_2E(256'h{INIT_2E}),	
+      .INIT_2F(256'h{INIT_2F}),	
+      .INIT_30(256'h{INIT_30}),	
+      .INIT_31(256'h{INIT_31}),	
+      .INIT_32(256'h{INIT_32}),	
+      .INIT_33(256'h{INIT_33}),	
+      .INIT_34(256'h{INIT_34}),	
+      .INIT_35(256'h{INIT_35}),	
+      .INIT_36(256'h{INIT_36}),	
+      .INIT_37(256'h{INIT_37}),	
+      .INIT_38(256'h{INIT_38}),	
+      .INIT_39(256'h{INIT_39}),	
+      .INIT_3A(256'h{INIT_3A}),	
+      .INIT_3B(256'h{INIT_3B}),	
+      .INIT_3C(256'h{INIT_3C}),	
+      .INIT_3D(256'h{INIT_3D}),	
+      .INIT_3E(256'h{INIT_3E}),	
+      .INIT_3F(256'h{INIT_3F}),
+      .INITP_00(256'h{INITP_00}),
+      .INITP_01(256'h{INITP_01}),
+      .INITP_02(256'h{INITP_02}),	
+      .INITP_03(256'h{INITP_03}),	
+      .INITP_04(256'h{INITP_04}),	
+      .INITP_05(256'h{INITP_05}),	
+      .INITP_06(256'h{INITP_06}),	
+      .INITP_07(256'h{INITP_07}))
+ram_1024_x_18(
+      .DI         (16'h0000),
+      .DIP        (2'b00),
+      .EN         (1'b1),
+      .WE         (1'b0),
+      .SSR        (1'b0),
+      .CLK        (clk),
+      .ADDR       (address),
+      .DO         (instruction[15:0]),
+      .DOP        (instruction[17:16])) ;
+//
+endmodule
+//
+//////////////////////////////////////////////////////////////////////////////////
+//
+// END OF FILE {name}.v
+//
+//////////////////////////////////////////////////////////////////////////////////
+//
