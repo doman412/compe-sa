@@ -1,0 +1,8064 @@
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;KCPSM3 Program - Real Time Clock with UART communication.
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Ken Chapman - Xilinx Ltd - October 2003
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Port definitions
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-UART_status_port
+  OP1 VALUE-UART_status_port
+   OPERAND2-00
+  OP2 VALUE-00
+    COMMENT-;UART status input
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-tx_half_full
+  OP1 VALUE-tx_half_full
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;  Transmitter     half full - bit0
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-tx_full
+  OP1 VALUE-tx_full
+   OPERAND2-02
+  OP2 VALUE-02
+    COMMENT-;    FIFO               full - bit1
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-rx_half_full
+  OP1 VALUE-rx_half_full
+   OPERAND2-04
+  OP2 VALUE-04
+    COMMENT-;  Receiver        half full - bit2
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-rx_full
+  OP1 VALUE-rx_full
+   OPERAND2-08
+  OP2 VALUE-08
+    COMMENT-;    FIFO               full - bit3
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-rx_data_present
+  OP1 VALUE-rx_data_present
+   OPERAND2-10
+  OP2 VALUE-10
+    COMMENT-;               data present - bit4
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-UART_read_port
+  OP1 VALUE-UART_read_port
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;UART Rx data input
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-UART_write_port
+  OP1 VALUE-UART_write_port
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;UART Tx data output
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-alarm_port
+  OP1 VALUE-alarm_port
+   OPERAND2-00
+  OP2 VALUE-00
+    COMMENT-;Alarm output
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-alarm_control
+  OP1 VALUE-alarm_control
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;     bit0
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Special Register usage
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-NAMEREG
+   OPERAND1-sF
+  OP1 VALUE-sF
+   OPERAND2-UART_data
+  OP2 VALUE-UART_data
+    COMMENT-;used to pass data to and from the UART
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-NAMEREG
+   OPERAND1-sE
+  OP1 VALUE-sE
+   OPERAND2-store_pointer
+  OP2 VALUE-store_pointer
+    COMMENT-;used to pass location of data in scratch pad memory
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Two registers to form a 16-bit counter used to count
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;interrupt pulses generated at 1us intervals.
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-NAMEREG
+   OPERAND1-sD
+  OP1 VALUE-sD
+   OPERAND2-int_counter_lsb
+  OP2 VALUE-int_counter_lsb
+    COMMENT-;lower 8-bits
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-NAMEREG
+   OPERAND1-sC
+  OP1 VALUE-sC
+   OPERAND2-int_counter_msb
+  OP2 VALUE-int_counter_msb
+    COMMENT-;upper 8-bits
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Scratch Pad Memory Locations
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-us_time_stamp_lsb
+  OP1 VALUE-us_time_stamp_lsb
+   OPERAND2-00
+  OP2 VALUE-00
+    COMMENT-;16-bit micro-second time stamp
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-us_time_stamp_msb
+  OP1 VALUE-us_time_stamp_msb
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-us_time_lsb
+  OP1 VALUE-us_time_lsb
+   OPERAND2-02
+  OP2 VALUE-02
+    COMMENT-;16-bit micro-second real time value
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-us_time_msb
+  OP1 VALUE-us_time_msb
+   OPERAND2-03
+  OP2 VALUE-03
+    COMMENT-
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-ms_time_lsb
+  OP1 VALUE-ms_time_lsb
+   OPERAND2-04
+  OP2 VALUE-04
+    COMMENT-;16-bit milli-second real time value
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-ms_time_msb
+  OP1 VALUE-ms_time_msb
+   OPERAND2-05
+  OP2 VALUE-05
+    COMMENT-
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-real_time_hours
+  OP1 VALUE-real_time_hours
+   OPERAND2-06
+  OP2 VALUE-06
+    COMMENT-;Current clock time
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-real_time_minutes
+  OP1 VALUE-real_time_minutes
+   OPERAND2-07
+  OP2 VALUE-07
+    COMMENT-
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-real_time_seconds
+  OP1 VALUE-real_time_seconds
+   OPERAND2-08
+  OP2 VALUE-08
+    COMMENT-
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-alarm_time_hours
+  OP1 VALUE-alarm_time_hours
+   OPERAND2-09
+  OP2 VALUE-09
+    COMMENT-;Alarm time
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-alarm_time_minutes
+  OP1 VALUE-alarm_time_minutes
+   OPERAND2-0A
+  OP2 VALUE-0A
+    COMMENT-
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-alarm_time_seconds
+  OP1 VALUE-alarm_time_seconds
+   OPERAND2-0B
+  OP2 VALUE-0B
+    COMMENT-
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-alarm_status
+  OP1 VALUE-alarm_status
+   OPERAND2-0C
+  OP2 VALUE-0C
+    COMMENT-;Alarm status
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-alarm_active
+  OP1 VALUE-alarm_active
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;    bit0 - Alarm is active
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-alarm_armed
+  OP1 VALUE-alarm_armed
+   OPERAND2-02
+  OP2 VALUE-02
+    COMMENT-;    bit1 - Alarm is armed
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-time_preserve0
+  OP1 VALUE-time_preserve0
+   OPERAND2-10
+  OP2 VALUE-10
+    COMMENT-;storage for protection of registers
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-time_preserve1
+  OP1 VALUE-time_preserve1
+   OPERAND2-11
+  OP2 VALUE-11
+    COMMENT-;used by the real time clock routine.
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-time_preserve2
+  OP1 VALUE-time_preserve2
+   OPERAND2-12
+  OP2 VALUE-12
+    COMMENT-
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-time_preserve3
+  OP1 VALUE-time_preserve3
+   OPERAND2-13
+  OP2 VALUE-13
+    COMMENT-
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-time_preserve4
+  OP1 VALUE-time_preserve4
+   OPERAND2-14
+  OP2 VALUE-14
+    COMMENT-
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-time_preserve5
+  OP1 VALUE-time_preserve5
+   OPERAND2-15
+  OP2 VALUE-15
+    COMMENT-
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;UART character strings will be stored in scratch pad memory ending in carriage return.
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;A string can be up to 16 characters with the start location defined by this constant.
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-string_start
+  OP1 VALUE-string_start
+   OPERAND2-20
+  OP2 VALUE-20
+    COMMENT-
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Initialise the system
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-000
+      LABEL-cold_start
+INSTRUCTION-LOAD
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-00
+  OP2 VALUE-00
+    COMMENT-;clear all time values
+    ADDRESS-001
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-us_time_stamp_lsb
+  OP2 VALUE-00
+    COMMENT-
+    ADDRESS-002
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-us_time_stamp_msb
+  OP2 VALUE-01
+    COMMENT-
+    ADDRESS-003
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-us_time_lsb
+  OP2 VALUE-02
+    COMMENT-
+    ADDRESS-004
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-us_time_msb
+  OP2 VALUE-03
+    COMMENT-
+    ADDRESS-005
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-ms_time_lsb
+  OP2 VALUE-04
+    COMMENT-
+    ADDRESS-006
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-ms_time_msb
+  OP2 VALUE-05
+    COMMENT-
+    ADDRESS-007
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-real_time_hours
+  OP2 VALUE-06
+    COMMENT-
+    ADDRESS-008
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-real_time_minutes
+  OP2 VALUE-07
+    COMMENT-
+    ADDRESS-009
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-real_time_seconds
+  OP2 VALUE-08
+    COMMENT-
+    ADDRESS-00A
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-alarm_time_hours
+  OP2 VALUE-09
+    COMMENT-
+    ADDRESS-00B
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-alarm_time_minutes
+  OP2 VALUE-0A
+    COMMENT-
+    ADDRESS-00C
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-alarm_time_seconds
+  OP2 VALUE-0B
+    COMMENT-
+    ADDRESS-00D
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-alarm_status
+  OP2 VALUE-0C
+    COMMENT-;clear and disable alarm
+    ADDRESS-00E
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-alarm_drive
+  OP1 VALUE-0A4
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;turn off alarm control output port
+    ADDRESS-00F
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-int_counter_lsb
+  OP1 VALUE-sD
+   OPERAND2-00
+  OP2 VALUE-00
+    COMMENT-;clear 'us' interrupt counter
+    ADDRESS-010
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-int_counter_msb
+  OP1 VALUE-sC
+   OPERAND2-00
+  OP2 VALUE-00
+    COMMENT-
+    ADDRESS-011
+      LABEL-
+INSTRUCTION-ENABLE
+   OPERAND1-INTERRUPT
+  OP1 VALUE-INTERRUPT
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;enable the 1us interrupts
+    ADDRESS-012
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-012
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-012
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Start of the main program loop.
+    ADDRESS-012
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-012
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;A prompt is transmitted to the UART transmitter and then
+    ADDRESS-012
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;a command can be entered and interpreted.
+    ADDRESS-012
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-012
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-012
+      LABEL-prompt_input
+INSTRUCTION-CALL
+   OPERAND1-send_prompt
+  OP1 VALUE-115
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Prompt 'KCPSM3>'
+    ADDRESS-013
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-receive_string
+  OP1 VALUE-0C3
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;obtain input string and maintain the time
+    ADDRESS-014
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-014
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-014
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Parse the string and perform actions as required
+    ADDRESS-014
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-014
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-014
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-014
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-string_start
+  OP2 VALUE-20
+    COMMENT-
+    ADDRESS-015
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+  OP1 VALUE-091
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-016
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_CR
+  OP2 VALUE-0D
+    COMMENT-;carriage return does nothing
+    ADDRESS-017
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+  OP1 VALUE-Z
+   OPERAND2-prompt_input
+  OP2 VALUE-012
+    COMMENT-
+    ADDRESS-018
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_T
+  OP2 VALUE-54
+    COMMENT-;start of 'TIME' command?
+    ADDRESS-019
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+  OP1 VALUE-Z
+   OPERAND2-test_for_TIME
+  OP2 VALUE-01E
+    COMMENT-
+    ADDRESS-01A
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_A
+  OP2 VALUE-41
+    COMMENT-;start of 'ALARM' command?
+    ADDRESS-01B
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+  OP1 VALUE-Z
+   OPERAND2-test_for_ALARM
+  OP2 VALUE-037
+    COMMENT-
+    ADDRESS-01C
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-01C
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;trap other command starts here
+    ADDRESS-01C
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-01C
+      LABEL-bad_input_command
+INSTRUCTION-CALL
+   OPERAND1-send_Syntax_Error
+  OP1 VALUE-0ED
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;no valid command
+    ADDRESS-01D
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+  OP1 VALUE-Z
+   OPERAND2-prompt_input
+  OP2 VALUE-012
+    COMMENT-
+    ADDRESS-01E
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-01E
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-01E
+      LABEL-test_for_TIME
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+  OP1 VALUE-091
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-01F
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_I
+  OP2 VALUE-49
+    COMMENT-;test for rest of 'TIME'
+    ADDRESS-020
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-bad_input_command
+  OP2 VALUE-01C
+    COMMENT-
+    ADDRESS-021
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+  OP1 VALUE-091
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-022
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_M
+  OP2 VALUE-4D
+    COMMENT-
+    ADDRESS-023
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-bad_input_command
+  OP2 VALUE-01C
+    COMMENT-
+    ADDRESS-024
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+  OP1 VALUE-091
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-025
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_E
+  OP2 VALUE-45
+    COMMENT-
+    ADDRESS-026
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-bad_input_command
+  OP2 VALUE-01C
+    COMMENT-
+    ADDRESS-027
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;now have a valid TIME command to process
+    ADDRESS-027
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+  OP1 VALUE-091
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-028
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_CR
+  OP2 VALUE-0D
+    COMMENT-;carriage return means display time
+    ADDRESS-029
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-set_time_command
+  OP2 VALUE-02C
+    COMMENT-
+    ADDRESS-02A
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-transmit_time
+  OP1 VALUE-0A8
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;transmit time to UART
+    ADDRESS-02B
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-prompt_input
+  OP1 VALUE-012
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-02C
+      LABEL-set_time_command
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_space
+  OP2 VALUE-20
+    COMMENT-
+    ADDRESS-02D
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-bad_input_command
+  OP2 VALUE-01C
+    COMMENT-
+    ADDRESS-02E
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-test_time_string
+  OP1 VALUE-06D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;interpret 'hh:mm:ss' string
+    ADDRESS-02F
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-C
+  OP1 VALUE-C
+   OPERAND2-prompt_input
+  OP2 VALUE-012
+    COMMENT-;test for invalid input
+    ADDRESS-030
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s6
+  OP1 VALUE-s6
+   OPERAND2-real_time_hours
+  OP2 VALUE-06
+    COMMENT-;set new time into clock
+    ADDRESS-031
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s5
+  OP1 VALUE-s5
+   OPERAND2-real_time_minutes
+  OP2 VALUE-07
+    COMMENT-
+    ADDRESS-032
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s4
+  OP1 VALUE-s4
+   OPERAND2-real_time_seconds
+  OP2 VALUE-08
+    COMMENT-
+    ADDRESS-033
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-ms_time_lsb
+  OP2 VALUE-04
+    COMMENT-;clear 'ms' counter (s0=00)
+    ADDRESS-034
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-ms_time_msb
+  OP2 VALUE-05
+    COMMENT-
+    ADDRESS-035
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-transmit_time
+  OP1 VALUE-0A8
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;transmit new time to UART
+    ADDRESS-036
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-prompt_input
+  OP1 VALUE-012
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-037
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-037
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-037
+      LABEL-test_for_ALARM
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+  OP1 VALUE-091
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-038
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_L
+  OP2 VALUE-4C
+    COMMENT-;test for rest of 'ALARM'
+    ADDRESS-039
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-bad_input_command
+  OP2 VALUE-01C
+    COMMENT-
+    ADDRESS-03A
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+  OP1 VALUE-091
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-03B
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_A
+  OP2 VALUE-41
+    COMMENT-
+    ADDRESS-03C
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-bad_input_command
+  OP2 VALUE-01C
+    COMMENT-
+    ADDRESS-03D
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+  OP1 VALUE-091
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-03E
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_R
+  OP2 VALUE-52
+    COMMENT-
+    ADDRESS-03F
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-bad_input_command
+  OP2 VALUE-01C
+    COMMENT-
+    ADDRESS-040
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+  OP1 VALUE-091
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-041
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_M
+  OP2 VALUE-4D
+    COMMENT-
+    ADDRESS-042
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-bad_input_command
+  OP2 VALUE-01C
+    COMMENT-
+    ADDRESS-043
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;now have a valid ALARM command to process
+    ADDRESS-043
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+  OP1 VALUE-091
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-044
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_CR
+  OP2 VALUE-0D
+    COMMENT-;carriage return means display alarm time
+    ADDRESS-045
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-set_alarm_command
+  OP2 VALUE-048
+    COMMENT-
+    ADDRESS-046
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-transmit_alarm_time
+  OP1 VALUE-0AC
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;transmit time to UART
+    ADDRESS-047
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-prompt_input
+  OP1 VALUE-012
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-048
+      LABEL-set_alarm_command
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_space
+  OP2 VALUE-20
+    COMMENT-;test for ON or OFF command
+    ADDRESS-049
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-bad_input_command
+  OP2 VALUE-01C
+    COMMENT-
+    ADDRESS-04A
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+  OP1 VALUE-091
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-04B
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_O
+  OP2 VALUE-4F
+    COMMENT-
+    ADDRESS-04C
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+  OP1 VALUE-Z
+   OPERAND2-set_alarm_on_off
+  OP2 VALUE-055
+    COMMENT-
+    ADDRESS-04D
+      LABEL-
+INSTRUCTION-SUB
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;move memory pointer back to first character of 'hh:mm:ss' string
+    ADDRESS-04E
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-test_time_string
+  OP1 VALUE-06D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;interpret 'hh:mm:ss' string
+    ADDRESS-04F
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-C
+  OP1 VALUE-C
+   OPERAND2-prompt_input
+  OP2 VALUE-012
+    COMMENT-;test for invalid input
+    ADDRESS-050
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s6
+  OP1 VALUE-s6
+   OPERAND2-alarm_time_hours
+  OP2 VALUE-09
+    COMMENT-;set new time into clock
+    ADDRESS-051
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s5
+  OP1 VALUE-s5
+   OPERAND2-alarm_time_minutes
+  OP2 VALUE-0A
+    COMMENT-
+    ADDRESS-052
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s4
+  OP1 VALUE-s4
+   OPERAND2-alarm_time_seconds
+  OP2 VALUE-0B
+    COMMENT-
+    ADDRESS-053
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-transmit_alarm_time
+  OP1 VALUE-0AC
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;transmit new alarm time and status
+    ADDRESS-054
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-prompt_input
+  OP1 VALUE-012
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-055
+      LABEL-set_alarm_on_off
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+  OP1 VALUE-091
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-056
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_N
+  OP2 VALUE-4E
+    COMMENT-;test for 'ON'
+    ADDRESS-057
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-test_OFF
+  OP2 VALUE-060
+    COMMENT-
+    ADDRESS-058
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+  OP1 VALUE-091
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-059
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_CR
+  OP2 VALUE-0D
+    COMMENT-
+    ADDRESS-05A
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-bad_input_command
+  OP2 VALUE-01C
+    COMMENT-
+    ADDRESS-05B
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-alarm_status
+  OP2 VALUE-0C
+    COMMENT-;turn alarm on
+    ADDRESS-05C
+      LABEL-
+INSTRUCTION-OR
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-alarm_armed
+  OP2 VALUE-02
+    COMMENT-
+    ADDRESS-05D
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-alarm_status
+  OP2 VALUE-0C
+    COMMENT-
+    ADDRESS-05E
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-transmit_alarm_time
+  OP1 VALUE-0AC
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;transmit alarm time and status
+    ADDRESS-05F
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-prompt_input
+  OP1 VALUE-012
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-060
+      LABEL-test_OFF
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_F
+  OP2 VALUE-46
+    COMMENT-;test for for 'OFF'
+    ADDRESS-061
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-bad_input_command
+  OP2 VALUE-01C
+    COMMENT-
+    ADDRESS-062
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+  OP1 VALUE-091
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-063
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_F
+  OP2 VALUE-46
+    COMMENT-
+    ADDRESS-064
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-bad_input_command
+  OP2 VALUE-01C
+    COMMENT-
+    ADDRESS-065
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+  OP1 VALUE-091
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-066
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_CR
+  OP2 VALUE-0D
+    COMMENT-
+    ADDRESS-067
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-bad_input_command
+  OP2 VALUE-01C
+    COMMENT-
+    ADDRESS-068
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-00
+  OP2 VALUE-00
+    COMMENT-;turn alarm off and stop an active alarm
+    ADDRESS-069
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-alarm_status
+  OP2 VALUE-0C
+    COMMENT-
+    ADDRESS-06A
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-alarm_drive
+  OP1 VALUE-0A4
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;turn off alarm
+    ADDRESS-06B
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-transmit_alarm_time
+  OP1 VALUE-0AC
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;transmit alarm time and status
+    ADDRESS-06C
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-prompt_input
+  OP1 VALUE-012
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Read an 'hh:mm:ss' time string and provide new values.
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The string must be provided in successive scratch pad memory locations
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;with the s1 register containing the location of the first character.
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;A correct time specification will result in the return of new values
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;as follows:-
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;       s6 = hours
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;       s5 = minutes
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;       s4 = seconds
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;If the syntax is incorrect or values are not in the correct ranges an
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;'Invalid Time' message will be transmitted and the CARRY flag will be set
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Registers used s0, s1, s6, s5 and s4
+    ADDRESS-06D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-06D
+      LABEL-test_time_string
+INSTRUCTION-CALL
+   OPERAND1-2char_to_value
+  OP1 VALUE-1EC
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;obtain hours value
+    ADDRESS-06E
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-C
+  OP1 VALUE-C
+   OPERAND2-invalid_time
+  OP2 VALUE-08B
+    COMMENT-;test for non-decimal characters
+    ADDRESS-06F
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s6
+  OP1 VALUE-s6
+   OPERAND2-s2
+  OP2 VALUE-s2
+    COMMENT-;remember hours
+    ADDRESS-070
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;increment memory pointer past hours
+    ADDRESS-071
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+  OP1 VALUE-091
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-072
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_colon
+  OP2 VALUE-3A
+    COMMENT-;test for colon
+    ADDRESS-073
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-invalid_time
+  OP2 VALUE-08B
+    COMMENT-
+    ADDRESS-074
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-2char_to_value
+  OP1 VALUE-1EC
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;obtain minutes value
+    ADDRESS-075
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-C
+  OP1 VALUE-C
+   OPERAND2-invalid_time
+  OP2 VALUE-08B
+    COMMENT-;test for non-decimal characters
+    ADDRESS-076
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s5
+  OP1 VALUE-s5
+   OPERAND2-s2
+  OP2 VALUE-s2
+    COMMENT-;remember minutes
+    ADDRESS-077
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;increment memory pointer past minutes
+    ADDRESS-078
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+  OP1 VALUE-091
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-079
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_colon
+  OP2 VALUE-3A
+    COMMENT-;test for colon
+    ADDRESS-07A
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-invalid_time
+  OP2 VALUE-08B
+    COMMENT-
+    ADDRESS-07B
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-2char_to_value
+  OP1 VALUE-1EC
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;obtain seconds value
+    ADDRESS-07C
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-C
+  OP1 VALUE-C
+   OPERAND2-invalid_time
+  OP2 VALUE-08B
+    COMMENT-;test for non-decimal characters
+    ADDRESS-07D
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s4
+  OP1 VALUE-s4
+   OPERAND2-s2
+  OP2 VALUE-s2
+    COMMENT-;remember minutes
+    ADDRESS-07E
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;increment memory pointer past seconds
+    ADDRESS-07F
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+  OP1 VALUE-091
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-080
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_CR
+  OP2 VALUE-0D
+    COMMENT-;finish with carriage return
+    ADDRESS-081
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-invalid_time
+  OP2 VALUE-08B
+    COMMENT-
+    ADDRESS-082
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Have values for hh:mm:ss but need to test if each is valid range.
+    ADDRESS-082
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s6
+  OP1 VALUE-s6
+   OPERAND2-hours_in_a_day
+  OP2 VALUE-18
+    COMMENT-
+    ADDRESS-083
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NC
+  OP1 VALUE-NC
+   OPERAND2-invalid_time
+  OP2 VALUE-08B
+    COMMENT-
+    ADDRESS-084
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s5
+  OP1 VALUE-s5
+   OPERAND2-minutes_in_an_hour
+  OP2 VALUE-3C
+    COMMENT-
+    ADDRESS-085
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NC
+  OP1 VALUE-NC
+   OPERAND2-invalid_time
+  OP2 VALUE-08B
+    COMMENT-
+    ADDRESS-086
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s4
+  OP1 VALUE-s4
+   OPERAND2-seconds_in_a_minute
+  OP2 VALUE-3C
+    COMMENT-
+    ADDRESS-087
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NC
+  OP1 VALUE-NC
+   OPERAND2-invalid_time
+  OP2 VALUE-08B
+    COMMENT-
+    ADDRESS-088
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-00
+  OP2 VALUE-00
+    COMMENT-
+    ADDRESS-089
+      LABEL-
+INSTRUCTION-SR0
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;reset CARRY flag (with s0=0)
+    ADDRESS-08A
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;time string was OK
+    ADDRESS-08B
+      LABEL-invalid_time
+INSTRUCTION-CALL
+   OPERAND1-send_Invalid
+  OP1 VALUE-125
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-08C
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_space
+  OP1 VALUE-0E7
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-08D
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_Time
+  OP1 VALUE-134
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-08E
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-
+    ADDRESS-08F
+      LABEL-
+INSTRUCTION-SR0
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;set CARRY flag
+    ADDRESS-090
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;time string was bad
+    ADDRESS-091
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-091
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-091
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Fetch character from memory, convert to upper case
+    ADDRESS-091
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;and increment memory pointer.
+    ADDRESS-091
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-091
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The memory pointer is provided in register s1.
+    ADDRESS-091
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The character obtained is returned in register s0.
+    ADDRESS-091
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-091
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Registers used s0 and s1.
+    ADDRESS-091
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-091
+      LABEL-fetch_char_from_memory
+INSTRUCTION-FETCH
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-(s1)
+  OP2 VALUE-(s1)
+    COMMENT-;read character
+    ADDRESS-092
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-upper_case
+  OP1 VALUE-1E2
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;convert to upper case
+    ADDRESS-093
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;increment memory pointer
+    ADDRESS-094
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-095
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-095
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-095
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-095
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Read one character from the UART
+    ADDRESS-095
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-095
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Character read will be returned in a register called 'UART_data' and will be
+    ADDRESS-095
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;echoed to the UART transmitter.
+    ADDRESS-095
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-095
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The routine first tests the receiver FIFO buffer to see if data is present.
+    ADDRESS-095
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;If the FIFO is empty, the routine waits until there is a character to read.
+    ADDRESS-095
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;As this could take any amount of time the wait loop includes a call to the
+    ADDRESS-095
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;subroutine which updates the real time clock.
+    ADDRESS-095
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-095
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Registers used s0 and UART_data
+    ADDRESS-095
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-095
+      LABEL-read_from_UART
+INSTRUCTION-INPUT
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-UART_status_port
+  OP2 VALUE-00
+    COMMENT-;test Rx_FIFO buffer
+    ADDRESS-096
+      LABEL-
+INSTRUCTION-TEST
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-rx_data_present
+  OP2 VALUE-10
+    COMMENT-
+    ADDRESS-097
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-read_character
+  OP2 VALUE-09A
+    COMMENT-
+    ADDRESS-098
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-update_time
+  OP1 VALUE-185
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Perform useful operation whilst waiting
+    ADDRESS-099
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-read_from_UART
+  OP1 VALUE-095
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-09A
+      LABEL-read_character
+INSTRUCTION-INPUT
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-UART_read_port
+  OP2 VALUE-01
+    COMMENT-;read from FIFO
+    ADDRESS-09B
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;echo received character
+    ADDRESS-09C
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Transmit one character to the UART
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Character supplied in register called 'UART_data'.
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The routine first tests the transmit FIFO buffer to see if it is full.
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;If the FIFO is full, the routine waits until there is space which could
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;be as long as it takes to transmit one complete character.
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;    Baud Rate    Time per Character (10 bits)
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;      9600           1,024us
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;     19200             521us
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;     38400             260us
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;     57600             174us
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;    115200              87us
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Since this is a relatively long duration, the wait loop includes a
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;call to the subroutine which updates the real time clock.
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Registers used s0
+    ADDRESS-09D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-09D
+      LABEL-send_to_UART
+INSTRUCTION-INPUT
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-UART_status_port
+  OP2 VALUE-00
+    COMMENT-;test Tx_FIFO buffer
+    ADDRESS-09E
+      LABEL-
+INSTRUCTION-TEST
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-tx_full
+  OP2 VALUE-02
+    COMMENT-
+    ADDRESS-09F
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+  OP1 VALUE-Z
+   OPERAND2-UART_write
+  OP2 VALUE-0A2
+    COMMENT-
+    ADDRESS-0A0
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-update_time
+  OP1 VALUE-185
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Perform useful operation whilst waiting
+    ADDRESS-0A1
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0A2
+      LABEL-UART_write
+INSTRUCTION-OUTPUT
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-UART_write_port
+  OP2 VALUE-01
+    COMMENT-
+    ADDRESS-0A3
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0A4
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0A4
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0A4
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0A4
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0A4
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Alarm output
+    ADDRESS-0A4
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0A4
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Uses the alarm status scratch pad memory to set or reset the alarm
+    ADDRESS-0A4
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;control bit on the alarm output port.
+    ADDRESS-0A4
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0A4
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Registers used s0
+    ADDRESS-0A4
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0A4
+      LABEL-alarm_drive
+INSTRUCTION-FETCH
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-alarm_status
+  OP2 VALUE-0C
+    COMMENT-;read status
+    ADDRESS-0A5
+      LABEL-
+INSTRUCTION-AND
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-alarm_active
+  OP2 VALUE-01
+    COMMENT-;isolate bit0
+    ADDRESS-0A6
+      LABEL-
+INSTRUCTION-OUTPUT
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-alarm_port
+  OP2 VALUE-00
+    COMMENT-
+    ADDRESS-0A7
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Transmit the time to the UART port in the format hh:mm:ss and end
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;with a carriage return.
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The time to converted must be stored in 3 scratch pad memory locations as
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;defined below. A register named 'store_pointer' must provide the address of
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;first location.
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;        Address                Data
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;     store_pointer      ----> hours
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;     store_pointer + 1  ----> minutes
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;     store_pointer + 1  ----> seconds
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The routine first converts the time into an ASCII string stored in scratch
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;pad memory starting at a location specified by a constant named 'string_start'.
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The string will then be transmitted.
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Registers used s0, s1, s2, 'store_pointer' and 'UART_data'.
+    ADDRESS-0A8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0A8
+      LABEL-transmit_time
+INSTRUCTION-LOAD
+   OPERAND1-store_pointer
+  OP1 VALUE-sE
+   OPERAND2-real_time_hours
+  OP2 VALUE-06
+    COMMENT-;locate current time in memory
+    ADDRESS-0A9
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-time_to_ASCII
+  OP1 VALUE-160
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0AA
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-transmit_string
+  OP1 VALUE-0BC
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0AB
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Transmit the alarm time and status to the UART port in the format hh:mm:ss and
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;ending with carriage return.
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The alarm time to converted must be stored in 3 scratch pad memory locations as
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;defined below. A register named 'store_pointer' must provide the address of
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;first location.
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;        Address                Data
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;     store_pointer      ----> hours
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;     store_pointer + 1  ----> minutes
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;     store_pointer + 1  ----> seconds
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The routine first converts the time into an ASCII string stored in scratch
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;pad memory starting at a location specified by a constant named 'string_start'.
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The string will then be transmitted.
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Registers used s0, s1, s2, 'store_pointer' and 'UART_data'.
+    ADDRESS-0AC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0AC
+      LABEL-transmit_alarm_time
+INSTRUCTION-LOAD
+   OPERAND1-store_pointer
+  OP1 VALUE-sE
+   OPERAND2-alarm_time_hours
+  OP2 VALUE-09
+    COMMENT-;locate alarm time in memory
+    ADDRESS-0AD
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-time_to_ASCII
+  OP1 VALUE-160
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0AE
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-transmit_string
+  OP1 VALUE-0BC
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0AF
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_Alarm
+  OP1 VALUE-13D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0B0
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_space
+  OP1 VALUE-0E7
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0B1
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-alarm_status
+  OP2 VALUE-0C
+    COMMENT-;read alarm status
+    ADDRESS-0B2
+      LABEL-
+INSTRUCTION-TEST
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-alarm_active
+  OP2 VALUE-01
+    COMMENT-;test for active
+    ADDRESS-0B3
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+  OP1 VALUE-Z
+   OPERAND2-test_armed
+  OP2 VALUE-0B6
+    COMMENT-
+    ADDRESS-0B4
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_Active
+  OP1 VALUE-153
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0B5
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0B6
+      LABEL-test_armed
+INSTRUCTION-TEST
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-alarm_armed
+  OP2 VALUE-02
+    COMMENT-;test for on
+    ADDRESS-0B7
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+  OP1 VALUE-Z
+   OPERAND2-alarm_is_off
+  OP2 VALUE-0BA
+    COMMENT-
+    ADDRESS-0B8
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_ON
+  OP1 VALUE-14E
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0B9
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0BA
+      LABEL-alarm_is_off
+INSTRUCTION-CALL
+   OPERAND1-send_OFF
+  OP1 VALUE-148
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0BB
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0BC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0BC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0BC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Transmit ASCII string to UART
+    ADDRESS-0BC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0BC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;An ASCII string must be provided in scratch pad memory commencing at the
+    ADDRESS-0BC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;location specified by a constant named 'string_start'. The string must
+    ADDRESS-0BC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;end with a carriage return (0D).
+    ADDRESS-0BC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0BC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Registers used s1 and 'UART_data'.
+    ADDRESS-0BC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;               s0 is then used in subroutine 'send_to_UART'
+    ADDRESS-0BC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0BC
+      LABEL-transmit_string
+INSTRUCTION-LOAD
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-string_start
+  OP2 VALUE-20
+    COMMENT-;locate start of string
+    ADDRESS-0BD
+      LABEL-next_char_tx
+INSTRUCTION-FETCH
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-(s1)
+  OP2 VALUE-(s1)
+    COMMENT-;read character from memory
+    ADDRESS-0BE
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;transmit character
+    ADDRESS-0BF
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_CR
+  OP2 VALUE-0D
+    COMMENT-;test for last character
+    ADDRESS-0C0
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-Z
+  OP1 VALUE-Z
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0C1
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;move to next character
+    ADDRESS-0C2
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-next_char_tx
+  OP1 VALUE-0BD
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Receive ASCII string from UART
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;An ASCII string will be read from the UART and stored in scratch pad memory
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;commencing at the location specified by a constant named 'string_start'.
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The string will will have a maximum length of 16 characters including a
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;carriage return (0D) denoting the end of the string.
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;As each character is read, it is echoed to the UART transmitter.
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Some minor editing is supported using backspace (BS=08) which is used
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;to adjust what is stored in scratch pad memory and adjust the display
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;on the terminal screen using characters sent to the UART transmitter.
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;A test is made for the receiver FIFO becoming full. A full status is treated as
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;a potential error situation and will result in a 'Overflow Error' message being
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;transmitted to the UART, the receiver FIFO being purged of all data and an
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;empty string being stored (carriage return at first location).
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Registers used s0, s1, s2 and 'UART_data'.
+    ADDRESS-0C3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0C3
+      LABEL-receive_string
+INSTRUCTION-LOAD
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-string_start
+  OP2 VALUE-20
+    COMMENT-;locate start of string
+    ADDRESS-0C4
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-s1
+  OP2 VALUE-s1
+    COMMENT-;compute 16 character address
+    ADDRESS-0C5
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-10
+  OP2 VALUE-10
+    COMMENT-
+    ADDRESS-0C6
+      LABEL-receive_full_test
+INSTRUCTION-INPUT
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-UART_status_port
+  OP2 VALUE-00
+    COMMENT-;test Rx_FIFO buffer for full
+    ADDRESS-0C7
+      LABEL-
+INSTRUCTION-TEST
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-rx_full
+  OP2 VALUE-08
+    COMMENT-
+    ADDRESS-0C8
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-read_error
+  OP2 VALUE-0DB
+    COMMENT-
+    ADDRESS-0C9
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-read_from_UART
+  OP1 VALUE-095
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;obtain and echo character
+    ADDRESS-0CA
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-(s1)
+  OP2 VALUE-(s1)
+    COMMENT-;write to memory
+    ADDRESS-0CB
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_CR
+  OP2 VALUE-0D
+    COMMENT-;test for end of string
+    ADDRESS-0CC
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-Z
+  OP1 VALUE-Z
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0CD
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_BS
+  OP2 VALUE-08
+    COMMENT-;test for back space
+    ADDRESS-0CE
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+  OP1 VALUE-Z
+   OPERAND2-BS_edit
+  OP2 VALUE-0D3
+    COMMENT-
+    ADDRESS-0CF
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;increment memory pointer
+    ADDRESS-0D0
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-s2
+  OP2 VALUE-s2
+    COMMENT-;test for pointer exceeding 16 characters
+    ADDRESS-0D1
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-receive_full_test
+  OP2 VALUE-0C6
+    COMMENT-;next character
+    ADDRESS-0D2
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_backspace
+  OP1 VALUE-0EA
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;hold end of string position on terminal display
+    ADDRESS-0D3
+      LABEL-BS_edit
+INSTRUCTION-SUB
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;memory pointer back one
+    ADDRESS-0D4
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-string_start
+  OP2 VALUE-20
+    COMMENT-;test for under flow
+    ADDRESS-0D5
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-C
+  OP1 VALUE-C
+   OPERAND2-string_start_again
+  OP2 VALUE-0D9
+    COMMENT-
+    ADDRESS-0D6
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_space
+  OP1 VALUE-0E7
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;clear character at current position
+    ADDRESS-0D7
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_backspace
+  OP1 VALUE-0EA
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;position cursor
+    ADDRESS-0D8
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-receive_full_test
+  OP1 VALUE-0C6
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;next character
+    ADDRESS-0D9
+      LABEL-string_start_again
+INSTRUCTION-CALL
+   OPERAND1-send_greater_than
+  OP1 VALUE-122
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;restore '>' at prompt
+    ADDRESS-0DA
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-receive_string
+  OP1 VALUE-0C3
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;begin again
+    ADDRESS-0DB
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Receiver buffer overflow condition
+    ADDRESS-0DB
+      LABEL-read_error
+INSTRUCTION-CALL
+   OPERAND1-send_CR
+  OP1 VALUE-0E4
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Transmit error message
+    ADDRESS-0DC
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-string_start
+  OP2 VALUE-20
+    COMMENT-;empty string in memory (start with CR)
+    ADDRESS-0DD
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_Overflow_Error
+  OP1 VALUE-0FA
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0DE
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_CR
+  OP1 VALUE-0E4
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0DF
+      LABEL-clear_UART_Rx_loop
+INSTRUCTION-INPUT
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-UART_status_port
+  OP2 VALUE-00
+    COMMENT-;test Rx_FIFO buffer for data
+    ADDRESS-0E0
+      LABEL-
+INSTRUCTION-TEST
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-rx_data_present
+  OP2 VALUE-10
+    COMMENT-
+    ADDRESS-0E1
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-Z
+  OP1 VALUE-Z
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;finish when buffer is empty
+    ADDRESS-0E2
+      LABEL-
+INSTRUCTION-INPUT
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-UART_read_port
+  OP2 VALUE-01
+    COMMENT-;read from FIFO and ignore
+    ADDRESS-0E3
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-clear_UART_Rx_loop
+  OP1 VALUE-0DF
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0E4
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0E4
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0E4
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0E4
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Send Carriage Return to the UART
+    ADDRESS-0E4
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0E4
+      LABEL-send_CR
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_CR
+  OP2 VALUE-0D
+    COMMENT-
+    ADDRESS-0E5
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0E6
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0E7
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0E7
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0E7
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0E7
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Send a space to the UART
+    ADDRESS-0E7
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0E7
+      LABEL-send_space
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_space
+  OP2 VALUE-20
+    COMMENT-
+    ADDRESS-0E8
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0E9
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0EA
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0EA
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0EA
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Send a back space to the UART
+    ADDRESS-0EA
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0EA
+      LABEL-send_backspace
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_BS
+  OP2 VALUE-08
+    COMMENT-
+    ADDRESS-0EB
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0EC
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0ED
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0ED
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Send 'Syntax Error' to the UART
+    ADDRESS-0ED
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0ED
+      LABEL-send_Syntax_Error
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_S
+  OP2 VALUE-53
+    COMMENT-
+    ADDRESS-0EE
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0EF
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_y
+  OP2 VALUE-79
+    COMMENT-
+    ADDRESS-0F0
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0F1
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_n
+  OP2 VALUE-6E
+    COMMENT-
+    ADDRESS-0F2
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0F3
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_t
+  OP2 VALUE-74
+    COMMENT-
+    ADDRESS-0F4
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0F5
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_a
+  OP2 VALUE-61
+    COMMENT-
+    ADDRESS-0F6
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0F7
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_x
+  OP2 VALUE-78
+    COMMENT-
+    ADDRESS-0F8
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0F9
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-send_space_Error
+  OP1 VALUE-10A
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0FA
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0FA
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Send 'Overflow Error' to the UART
+    ADDRESS-0FA
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-0FA
+      LABEL-send_Overflow_Error
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_O
+  OP2 VALUE-4F
+    COMMENT-
+    ADDRESS-0FB
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0FC
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_v
+  OP2 VALUE-76
+    COMMENT-
+    ADDRESS-0FD
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-0FE
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_e
+  OP2 VALUE-65
+    COMMENT-
+    ADDRESS-0FF
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-100
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_r
+  OP2 VALUE-72
+    COMMENT-
+    ADDRESS-101
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-102
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_f
+  OP2 VALUE-66
+    COMMENT-
+    ADDRESS-103
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-104
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_l
+  OP2 VALUE-6C
+    COMMENT-
+    ADDRESS-105
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-106
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_o
+  OP2 VALUE-6F
+    COMMENT-
+    ADDRESS-107
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-108
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_w
+  OP2 VALUE-77
+    COMMENT-
+    ADDRESS-109
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-10A
+      LABEL-send_space_Error
+INSTRUCTION-CALL
+   OPERAND1-send_space
+  OP1 VALUE-0E7
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-10B
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-10B
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Send 'Error' to the UART
+    ADDRESS-10B
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-10B
+      LABEL-send_Error
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_E
+  OP2 VALUE-45
+    COMMENT-
+    ADDRESS-10C
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-10D
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_r
+  OP2 VALUE-72
+    COMMENT-
+    ADDRESS-10E
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-10F
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-110
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_o
+  OP2 VALUE-6F
+    COMMENT-
+    ADDRESS-111
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-112
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_r
+  OP2 VALUE-72
+    COMMENT-
+    ADDRESS-113
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-114
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-115
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-115
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Send 'KCPSM3>' prompt to the UART
+    ADDRESS-115
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-115
+      LABEL-send_prompt
+INSTRUCTION-CALL
+   OPERAND1-send_CR
+  OP1 VALUE-0E4
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;start new line
+    ADDRESS-116
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_K
+  OP2 VALUE-4B
+    COMMENT-
+    ADDRESS-117
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-118
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_C
+  OP2 VALUE-43
+    COMMENT-
+    ADDRESS-119
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-11A
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_P
+  OP2 VALUE-50
+    COMMENT-
+    ADDRESS-11B
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-11C
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_S
+  OP2 VALUE-53
+    COMMENT-
+    ADDRESS-11D
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-11E
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_M
+  OP2 VALUE-4D
+    COMMENT-
+    ADDRESS-11F
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-120
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_3
+  OP2 VALUE-33
+    COMMENT-
+    ADDRESS-121
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-122
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-122
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Send '>' character to the UART
+    ADDRESS-122
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-122
+      LABEL-send_greater_than
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_greater_than
+  OP2 VALUE-3E
+    COMMENT-
+    ADDRESS-123
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-124
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-125
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-125
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Send 'Invalid' string to the UART
+    ADDRESS-125
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-125
+      LABEL-send_Invalid
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_I
+  OP2 VALUE-49
+    COMMENT-
+    ADDRESS-126
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-127
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_n
+  OP2 VALUE-6E
+    COMMENT-
+    ADDRESS-128
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-129
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_v
+  OP2 VALUE-76
+    COMMENT-
+    ADDRESS-12A
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-12B
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_a
+  OP2 VALUE-61
+    COMMENT-
+    ADDRESS-12C
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-12D
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_l
+  OP2 VALUE-6C
+    COMMENT-
+    ADDRESS-12E
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-12F
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_i
+  OP2 VALUE-69
+    COMMENT-
+    ADDRESS-130
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-131
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_d
+  OP2 VALUE-64
+    COMMENT-
+    ADDRESS-132
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-133
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-134
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-134
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Send 'Time' string to the UART
+    ADDRESS-134
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-134
+      LABEL-send_Time
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_T
+  OP2 VALUE-54
+    COMMENT-
+    ADDRESS-135
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-136
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_i
+  OP2 VALUE-69
+    COMMENT-
+    ADDRESS-137
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-138
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_m
+  OP2 VALUE-6D
+    COMMENT-
+    ADDRESS-139
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-13A
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_e
+  OP2 VALUE-65
+    COMMENT-
+    ADDRESS-13B
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-13C
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-13D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-13D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Send 'Alarm' string to the UART
+    ADDRESS-13D
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-13D
+      LABEL-send_Alarm
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_A
+  OP2 VALUE-41
+    COMMENT-
+    ADDRESS-13E
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-13F
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_l
+  OP2 VALUE-6C
+    COMMENT-
+    ADDRESS-140
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-141
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_a
+  OP2 VALUE-61
+    COMMENT-
+    ADDRESS-142
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-143
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_r
+  OP2 VALUE-72
+    COMMENT-
+    ADDRESS-144
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-145
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_m
+  OP2 VALUE-6D
+    COMMENT-
+    ADDRESS-146
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-147
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-148
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-148
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Send 'OFF' string to the UART
+    ADDRESS-148
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-148
+      LABEL-send_OFF
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_O
+  OP2 VALUE-4F
+    COMMENT-
+    ADDRESS-149
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-14A
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_F
+  OP2 VALUE-46
+    COMMENT-
+    ADDRESS-14B
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-14C
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-14D
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-14E
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-14E
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Send 'ON' string to the UART
+    ADDRESS-14E
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-14E
+      LABEL-send_ON
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_O
+  OP2 VALUE-4F
+    COMMENT-
+    ADDRESS-14F
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-150
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_N
+  OP2 VALUE-4E
+    COMMENT-
+    ADDRESS-151
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-152
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-153
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-153
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Send 'Active' string to the UART
+    ADDRESS-153
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-153
+      LABEL-send_Active
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_A
+  OP2 VALUE-41
+    COMMENT-
+    ADDRESS-154
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-155
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_c
+  OP2 VALUE-63
+    COMMENT-
+    ADDRESS-156
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-157
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_t
+  OP2 VALUE-74
+    COMMENT-
+    ADDRESS-158
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-159
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_i
+  OP2 VALUE-69
+    COMMENT-
+    ADDRESS-15A
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-15B
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_v
+  OP2 VALUE-76
+    COMMENT-
+    ADDRESS-15C
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-15D
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+  OP1 VALUE-sF
+   OPERAND2-character_e
+  OP2 VALUE-65
+    COMMENT-
+    ADDRESS-15E
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+  OP1 VALUE-09D
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-15F
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-160
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-160
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-160
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Convert time to ASCII string in scratch pad memory.
+    ADDRESS-160
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-160
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The time to converted must be stored in 3 scratch pad memory locations as
+    ADDRESS-160
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;defined below. A register named 'store_pointer' must provide the address of
+    ADDRESS-160
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;first location.
+    ADDRESS-160
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-160
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;        Address                Data
+    ADDRESS-160
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-160
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;     store_pointer      ----> hours
+    ADDRESS-160
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;     store_pointer + 1  ----> minutes
+    ADDRESS-160
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;     store_pointer + 1  ----> seconds
+    ADDRESS-160
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-160
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The resulting ASCII string will be stored in scratch pad memory starting at
+    ADDRESS-160
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;a location specified by a constant named 'string_start'. The string will
+    ADDRESS-160
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;take the format hh:mm:ss and end with a carriage return.
+    ADDRESS-160
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-160
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Registers used s0, s1, s2 and 'store_pointer'.
+    ADDRESS-160
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-160
+      LABEL-time_to_ASCII
+INSTRUCTION-LOAD
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-string_start
+  OP2 VALUE-20
+    COMMENT-;location for string
+    ADDRESS-161
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-(store_pointer)
+  OP2 VALUE-(sE)
+    COMMENT-;read hours value
+    ADDRESS-162
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-decimal_to_ASCII
+  OP1 VALUE-17E
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;convert to ASCII
+    ADDRESS-163
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-(s2)
+  OP2 VALUE-(s2)
+    COMMENT-;write hours to string
+    ADDRESS-164
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-
+    ADDRESS-165
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-(s2)
+  OP2 VALUE-(s2)
+    COMMENT-
+    ADDRESS-166
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-
+    ADDRESS-167
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_colon
+  OP2 VALUE-3A
+    COMMENT-;write ':' to string
+    ADDRESS-168
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-(s2)
+  OP2 VALUE-(s2)
+    COMMENT-
+    ADDRESS-169
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-
+    ADDRESS-16A
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-store_pointer
+  OP1 VALUE-sE
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;move to minutes
+    ADDRESS-16B
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-(store_pointer)
+  OP2 VALUE-(sE)
+    COMMENT-;read minutes value
+    ADDRESS-16C
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-decimal_to_ASCII
+  OP1 VALUE-17E
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;convert to ASCII
+    ADDRESS-16D
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-(s2)
+  OP2 VALUE-(s2)
+    COMMENT-;write minutes to string
+    ADDRESS-16E
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-
+    ADDRESS-16F
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-(s2)
+  OP2 VALUE-(s2)
+    COMMENT-
+    ADDRESS-170
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-
+    ADDRESS-171
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_colon
+  OP2 VALUE-3A
+    COMMENT-;write ':' to string
+    ADDRESS-172
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-(s2)
+  OP2 VALUE-(s2)
+    COMMENT-
+    ADDRESS-173
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-
+    ADDRESS-174
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-store_pointer
+  OP1 VALUE-sE
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;move to seconds
+    ADDRESS-175
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-(store_pointer)
+  OP2 VALUE-(sE)
+    COMMENT-;read seconds value
+    ADDRESS-176
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-decimal_to_ASCII
+  OP1 VALUE-17E
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;convert to ASCII
+    ADDRESS-177
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-(s2)
+  OP2 VALUE-(s2)
+    COMMENT-;write seconds to string
+    ADDRESS-178
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-
+    ADDRESS-179
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-(s2)
+  OP2 VALUE-(s2)
+    COMMENT-
+    ADDRESS-17A
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-
+    ADDRESS-17B
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-character_CR
+  OP2 VALUE-0D
+    COMMENT-;finish string with carriage return
+    ADDRESS-17C
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-(s2)
+  OP2 VALUE-(s2)
+    COMMENT-
+    ADDRESS-17D
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-17E
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-17E
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Convert value provided in register s0 into ASCII characters
+    ADDRESS-17E
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-17E
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The value provided must in the range 0 to 99 and will be converted into
+    ADDRESS-17E
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;two ASCII characters.
+    ADDRESS-17E
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;     The number of 'tens' will be representd by an ASCII character returned in register s1.
+    ADDRESS-17E
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;     The number of 'units' will be representd by an ASCII character returned in register s0.
+    ADDRESS-17E
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-17E
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The ASCII representations of '0' to '9' are 30 to 39 hexadecimal which is simply 30 hex added to
+    ADDRESS-17E
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;the actual decimal value.
+    ADDRESS-17E
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-17E
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Registers used s0 and s1.
+    ADDRESS-17E
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-17E
+      LABEL-decimal_to_ASCII
+INSTRUCTION-LOAD
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-30
+  OP2 VALUE-30
+    COMMENT-;load 'tens' counter with ASCII for '0'
+    ADDRESS-17F
+      LABEL-test_for_ten
+INSTRUCTION-ADD
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;increment 'tens' value
+    ADDRESS-180
+      LABEL-
+INSTRUCTION-SUB
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-0A
+  OP2 VALUE-0A
+    COMMENT-;try to subtract 10 from the supplied value
+    ADDRESS-181
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NC
+  OP1 VALUE-NC
+   OPERAND2-test_for_ten
+  OP2 VALUE-17F
+    COMMENT-;repeat if subtraction was possible without underflow.
+    ADDRESS-182
+      LABEL-
+INSTRUCTION-SUB
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;'tens' value one less ten due to underflow
+    ADDRESS-183
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-3A
+  OP2 VALUE-3A
+    COMMENT-;restore units value (the remainder) and convert to ASCII
+    ADDRESS-184
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Real Time Clock
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Uses the 1us interrupt counter [int_counter_msb,int_counter_lsb] to determine how many
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;micro-seconds have elapsed since the last update. This allows for just over 65ms between
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;updates. Complete multiples of 1000us are used to update a 16-bit milli-second counter held
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;in scratch pad memory locations [ms_time_stamp_msb,ms_time_stamp_msb] which in turn
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;is used to update the real time hours, minutes and seconds clock held in scratch pad
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;memory locations 'real_time_hours', 'real_time_minutes' and 'real_time_seconds'.
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The routine uses default register names s0,s1,s2,s3,s4,s5. These are preserved in scratch pad
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;memory during the routine and restored before returning.
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Useful constants for real time clock operations
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-count_1000_lsb
+  OP1 VALUE-count_1000_lsb
+   OPERAND2-E8
+  OP2 VALUE-E8
+    COMMENT-;lower 8-bits of 1000 count value
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-count_1000_msb
+  OP1 VALUE-count_1000_msb
+   OPERAND2-03
+  OP2 VALUE-03
+    COMMENT-;upper 8-bits of 1000 count value
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-hours_in_a_day
+  OP1 VALUE-hours_in_a_day
+   OPERAND2-18
+  OP2 VALUE-18
+    COMMENT-;24 hours in a day
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-minutes_in_an_hour
+  OP1 VALUE-minutes_in_an_hour
+   OPERAND2-3C
+  OP2 VALUE-3C
+    COMMENT-;60 minutes in an hour
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-seconds_in_a_minute
+  OP1 VALUE-seconds_in_a_minute
+   OPERAND2-3C
+  OP2 VALUE-3C
+    COMMENT-;60 seconds in a minute
+    ADDRESS-185
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-185
+      LABEL-update_time
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-time_preserve0
+  OP2 VALUE-10
+    COMMENT-;preserve contents of registers used during routine
+    ADDRESS-186
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-time_preserve1
+  OP2 VALUE-11
+    COMMENT-
+    ADDRESS-187
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-time_preserve2
+  OP2 VALUE-12
+    COMMENT-
+    ADDRESS-188
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s3
+  OP1 VALUE-s3
+   OPERAND2-time_preserve3
+  OP2 VALUE-13
+    COMMENT-
+    ADDRESS-189
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s4
+  OP1 VALUE-s4
+   OPERAND2-time_preserve4
+  OP2 VALUE-14
+    COMMENT-
+    ADDRESS-18A
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s5
+  OP1 VALUE-s5
+   OPERAND2-time_preserve5
+  OP2 VALUE-15
+    COMMENT-
+    ADDRESS-18B
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-18B
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-us_time_stamp_lsb
+  OP2 VALUE-00
+    COMMENT-;read the previous 'us' time stamp into [s3,s2]
+    ADDRESS-18C
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s3
+  OP1 VALUE-s3
+   OPERAND2-us_time_stamp_msb
+  OP2 VALUE-01
+    COMMENT-
+    ADDRESS-18D
+      LABEL-
+INSTRUCTION-DISABLE
+   OPERAND1-INTERRUPT
+  OP1 VALUE-INTERRUPT
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Read and store current 'us' time stamp provided by the interrupt
+    ADDRESS-18E
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-int_counter_lsb
+  OP1 VALUE-sD
+   OPERAND2-us_time_stamp_lsb
+  OP2 VALUE-00
+    COMMENT-;counter. Interrupts are disabled to ensure that both bytes relate
+    ADDRESS-18F
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-int_counter_msb
+  OP1 VALUE-sC
+   OPERAND2-us_time_stamp_msb
+  OP2 VALUE-01
+    COMMENT-;to the same count value.
+    ADDRESS-190
+      LABEL-
+INSTRUCTION-ENABLE
+   OPERAND1-INTERRUPT
+  OP1 VALUE-INTERRUPT
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-191
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s4
+  OP1 VALUE-s4
+   OPERAND2-us_time_stamp_lsb
+  OP2 VALUE-00
+    COMMENT-;read the new 'us' time stamp in [s5,s4]
+    ADDRESS-192
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s5
+  OP1 VALUE-s5
+   OPERAND2-us_time_stamp_msb
+  OP2 VALUE-01
+    COMMENT-;
+    ADDRESS-193
+      LABEL-
+INSTRUCTION-SUB
+   OPERAND1-s4
+  OP1 VALUE-s4
+   OPERAND2-s2
+  OP2 VALUE-s2
+    COMMENT-;calculate 'us' time difference [s5,s4] = [s5,s4] - [s3,s2]
+    ADDRESS-194
+      LABEL-
+INSTRUCTION-SUBCY
+   OPERAND1-s5
+  OP1 VALUE-s5
+   OPERAND2-s3
+  OP2 VALUE-s3
+    COMMENT-;   (This works correctly even if counter has rolled over)
+    ADDRESS-195
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-us_time_lsb
+  OP2 VALUE-02
+    COMMENT-;read current 'us' time into [s3,s2]
+    ADDRESS-196
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s3
+  OP1 VALUE-s3
+   OPERAND2-us_time_msb
+  OP2 VALUE-03
+    COMMENT-
+    ADDRESS-197
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-s4
+  OP2 VALUE-s4
+    COMMENT-;add on the elapsed 'us' value [s3,s2] = [s3,s2] + [s5,s4]
+    ADDRESS-198
+      LABEL-
+INSTRUCTION-ADDCY
+   OPERAND1-s3
+  OP1 VALUE-s3
+   OPERAND2-s5
+  OP2 VALUE-s5
+    COMMENT-
+    ADDRESS-199
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;determine how many 1000us (1ms) units there are (if any) in current 'us' time
+    ADDRESS-199
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-00
+  OP2 VALUE-00
+    COMMENT-;reset 'ms' counter
+    ADDRESS-19A
+      LABEL-test_1000us
+INSTRUCTION-SUB
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-count_1000_lsb
+  OP2 VALUE-E8
+    COMMENT-;subtract 1000 from [s3,s2]
+    ADDRESS-19B
+      LABEL-
+INSTRUCTION-SUBCY
+   OPERAND1-s3
+  OP1 VALUE-s3
+   OPERAND2-count_1000_msb
+  OP2 VALUE-03
+    COMMENT-
+    ADDRESS-19C
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-C
+  OP1 VALUE-C
+   OPERAND2-store_us_time
+  OP2 VALUE-19F
+    COMMENT-;Carry indicates [s3,s2] was less than 1000us
+    ADDRESS-19D
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;increment 'ms' elapsed because [s3,s2] was more or equal to 1000us
+    ADDRESS-19E
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-test_1000us
+  OP1 VALUE-19A
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;repeat to see if more than 1ms has elapsed
+    ADDRESS-19F
+      LABEL-store_us_time
+INSTRUCTION-ADD
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-count_1000_lsb
+  OP2 VALUE-E8
+    COMMENT-;add 1000 to restore 'us' value
+    ADDRESS-1A0
+      LABEL-
+INSTRUCTION-ADDCY
+   OPERAND1-s3
+  OP1 VALUE-s3
+   OPERAND2-count_1000_msb
+  OP2 VALUE-03
+    COMMENT-
+    ADDRESS-1A1
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-us_time_lsb
+  OP2 VALUE-02
+    COMMENT-;store the current value of 'us'
+    ADDRESS-1A2
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s3
+  OP1 VALUE-s3
+   OPERAND2-us_time_msb
+  OP2 VALUE-03
+    COMMENT-
+    ADDRESS-1A3
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;s0 holds the number of 'ms' elapsed since last update (if any).
+    ADDRESS-1A3
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-ms_time_lsb
+  OP2 VALUE-04
+    COMMENT-;read current 'ms' time into [s3,s2]
+    ADDRESS-1A4
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s3
+  OP1 VALUE-s3
+   OPERAND2-ms_time_msb
+  OP2 VALUE-05
+    COMMENT-
+    ADDRESS-1A5
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-s0
+  OP2 VALUE-s0
+    COMMENT-;add on the elapsed 'ms' value [s3,s2] = [s3,s2] + s0
+    ADDRESS-1A6
+      LABEL-
+INSTRUCTION-ADDCY
+   OPERAND1-s3
+  OP1 VALUE-s3
+   OPERAND2-00
+  OP2 VALUE-00
+    COMMENT-
+    ADDRESS-1A7
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;determine if there are now more than 1000ms to form 1 second.
+    ADDRESS-1A7
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-00
+  OP2 VALUE-00
+    COMMENT-;reset 'second' counter
+    ADDRESS-1A8
+      LABEL-
+INSTRUCTION-SUB
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-count_1000_lsb
+  OP2 VALUE-E8
+    COMMENT-;subtract 1000 from [s3,s2]
+    ADDRESS-1A9
+      LABEL-
+INSTRUCTION-SUBCY
+   OPERAND1-s3
+  OP1 VALUE-s3
+   OPERAND2-count_1000_msb
+  OP2 VALUE-03
+    COMMENT-
+    ADDRESS-1AA
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-C
+  OP1 VALUE-C
+   OPERAND2-restore_ms_time
+  OP2 VALUE-1AD
+    COMMENT-;Carry indicates [s3,s2] was less than 1000ms
+    ADDRESS-1AB
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;increment 'second' elapsed because [s3,s2] was more or equal to 1000ms
+    ADDRESS-1AC
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-store_ms_time
+  OP1 VALUE-1AF
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;new value of 'ms' is remainder of subtraction
+    ADDRESS-1AD
+      LABEL-restore_ms_time
+INSTRUCTION-ADD
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-count_1000_lsb
+  OP2 VALUE-E8
+    COMMENT-;add 1000 to restore 'ms' value
+    ADDRESS-1AE
+      LABEL-
+INSTRUCTION-ADDCY
+   OPERAND1-s3
+  OP1 VALUE-s3
+   OPERAND2-count_1000_msb
+  OP2 VALUE-03
+    COMMENT-
+    ADDRESS-1AF
+      LABEL-store_ms_time
+INSTRUCTION-STORE
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-ms_time_lsb
+  OP2 VALUE-04
+    COMMENT-;store the current value of 'ms'
+    ADDRESS-1B0
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s3
+  OP1 VALUE-s3
+   OPERAND2-ms_time_msb
+  OP2 VALUE-05
+    COMMENT-
+    ADDRESS-1B1
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;s0 currently determines if one second needs to be added to the hh:mm:ss clock time
+    ADDRESS-1B1
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-real_time_seconds
+  OP2 VALUE-08
+    COMMENT-;read seconds
+    ADDRESS-1B2
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-s0
+  OP2 VALUE-s0
+    COMMENT-;add one second if required by s0
+    ADDRESS-1B3
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-seconds_in_a_minute
+  OP2 VALUE-3C
+    COMMENT-;test for 1 minute
+    ADDRESS-1B4
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+  OP1 VALUE-Z
+   OPERAND2-inc_minutes
+  OP2 VALUE-1B7
+    COMMENT-
+    ADDRESS-1B5
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-real_time_seconds
+  OP2 VALUE-08
+    COMMENT-;store updated seconds
+    ADDRESS-1B6
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-time_update_complete
+  OP1 VALUE-1C9
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-1B7
+      LABEL-inc_minutes
+INSTRUCTION-LOAD
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-00
+  OP2 VALUE-00
+    COMMENT-;seconds become zero
+    ADDRESS-1B8
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-real_time_seconds
+  OP2 VALUE-08
+    COMMENT-
+    ADDRESS-1B9
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-real_time_minutes
+  OP2 VALUE-07
+    COMMENT-;read minutes
+    ADDRESS-1BA
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;increment minutes
+    ADDRESS-1BB
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-minutes_in_an_hour
+  OP2 VALUE-3C
+    COMMENT-;test for 1 hour
+    ADDRESS-1BC
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+  OP1 VALUE-Z
+   OPERAND2-inc_hours
+  OP2 VALUE-1BF
+    COMMENT-
+    ADDRESS-1BD
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-real_time_minutes
+  OP2 VALUE-07
+    COMMENT-;store updated minutes
+    ADDRESS-1BE
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-time_update_complete
+  OP1 VALUE-1C9
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-1BF
+      LABEL-inc_hours
+INSTRUCTION-LOAD
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-00
+  OP2 VALUE-00
+    COMMENT-;minutes become zero
+    ADDRESS-1C0
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-real_time_minutes
+  OP2 VALUE-07
+    COMMENT-
+    ADDRESS-1C1
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-real_time_hours
+  OP2 VALUE-06
+    COMMENT-;read hours
+    ADDRESS-1C2
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;increment hours
+    ADDRESS-1C3
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-hours_in_a_day
+  OP2 VALUE-18
+    COMMENT-;test for 24 hours
+    ADDRESS-1C4
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+  OP1 VALUE-Z
+   OPERAND2-reset_hours
+  OP2 VALUE-1C7
+    COMMENT-
+    ADDRESS-1C5
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-real_time_hours
+  OP2 VALUE-06
+    COMMENT-;store updated hours
+    ADDRESS-1C6
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-time_update_complete
+  OP1 VALUE-1C9
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-1C7
+      LABEL-reset_hours
+INSTRUCTION-LOAD
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-00
+  OP2 VALUE-00
+    COMMENT-;hours become zero
+    ADDRESS-1C8
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-real_time_hours
+  OP2 VALUE-06
+    COMMENT-
+    ADDRESS-1C9
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-1C9
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;With the time updated, there is then a test for time=alarm time
+    ADDRESS-1C9
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-1C9
+      LABEL-time_update_complete
+INSTRUCTION-FETCH
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-real_time_hours
+  OP2 VALUE-06
+    COMMENT-
+    ADDRESS-1CA
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-alarm_time_hours
+  OP2 VALUE-09
+    COMMENT-;compare hours
+    ADDRESS-1CB
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-s1
+  OP2 VALUE-s1
+    COMMENT-
+    ADDRESS-1CC
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-finish_update
+  OP2 VALUE-1DB
+    COMMENT-
+    ADDRESS-1CD
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-real_time_minutes
+  OP2 VALUE-07
+    COMMENT-;compare minutes
+    ADDRESS-1CE
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-alarm_time_minutes
+  OP2 VALUE-0A
+    COMMENT-
+    ADDRESS-1CF
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-s1
+  OP2 VALUE-s1
+    COMMENT-
+    ADDRESS-1D0
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-finish_update
+  OP2 VALUE-1DB
+    COMMENT-
+    ADDRESS-1D1
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-real_time_seconds
+  OP2 VALUE-08
+    COMMENT-;compare seconds
+    ADDRESS-1D2
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-alarm_time_seconds
+  OP2 VALUE-0B
+    COMMENT-
+    ADDRESS-1D3
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-s1
+  OP2 VALUE-s1
+    COMMENT-
+    ADDRESS-1D4
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+  OP1 VALUE-NZ
+   OPERAND2-finish_update
+  OP2 VALUE-1DB
+    COMMENT-
+    ADDRESS-1D5
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-alarm_status
+  OP2 VALUE-0C
+    COMMENT-;test if alarm is turned on
+    ADDRESS-1D6
+      LABEL-
+INSTRUCTION-TEST
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-alarm_armed
+  OP2 VALUE-02
+    COMMENT-
+    ADDRESS-1D7
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+  OP1 VALUE-Z
+   OPERAND2-finish_update
+  OP2 VALUE-1DB
+    COMMENT-;alarm was off
+    ADDRESS-1D8
+      LABEL-
+INSTRUCTION-OR
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-alarm_active
+  OP2 VALUE-01
+    COMMENT-;activate alarm
+    ADDRESS-1D9
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-alarm_status
+  OP2 VALUE-0C
+    COMMENT-
+    ADDRESS-1DA
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-alarm_drive
+  OP1 VALUE-0A4
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-1DB
+      LABEL-finish_update
+INSTRUCTION-FETCH
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-time_preserve0
+  OP2 VALUE-10
+    COMMENT-;restore the register contents
+    ADDRESS-1DC
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-time_preserve1
+  OP2 VALUE-11
+    COMMENT-
+    ADDRESS-1DD
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-time_preserve2
+  OP2 VALUE-12
+    COMMENT-
+    ADDRESS-1DE
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s3
+  OP1 VALUE-s3
+   OPERAND2-time_preserve3
+  OP2 VALUE-13
+    COMMENT-
+    ADDRESS-1DF
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s4
+  OP1 VALUE-s4
+   OPERAND2-time_preserve4
+  OP2 VALUE-14
+    COMMENT-
+    ADDRESS-1E0
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s5
+  OP1 VALUE-s5
+   OPERAND2-time_preserve5
+  OP2 VALUE-15
+    COMMENT-
+    ADDRESS-1E1
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-1E2
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-1E2
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Convert character to upper case
+    ADDRESS-1E2
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-1E2
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The character supplied in register s0.
+    ADDRESS-1E2
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;If the character is in the range 'a' to 'z', it is converted
+    ADDRESS-1E2
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;to the equivalent upper case character in the range 'A' to 'Z'.
+    ADDRESS-1E2
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;All other characters remain unchanged.
+    ADDRESS-1E2
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-1E2
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Registers used s0.
+    ADDRESS-1E2
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-1E2
+      LABEL-upper_case
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-61
+  OP2 VALUE-61
+    COMMENT-;eliminate character codes below 'a' (61 hex)
+    ADDRESS-1E3
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-C
+  OP1 VALUE-C
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-1E4
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-7B
+  OP2 VALUE-7B
+    COMMENT-;eliminate character codes above 'z' (7A hex)
+    ADDRESS-1E5
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-NC
+  OP1 VALUE-NC
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-1E6
+      LABEL-
+INSTRUCTION-AND
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-DF
+  OP2 VALUE-DF
+    COMMENT-;mask bit5 to convert to upper case
+    ADDRESS-1E7
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-1E8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-1E8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-1E8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Convert character '0' to '9' to numerical value in range 0 to 9
+    ADDRESS-1E8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-1E8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The character supplied in register s0. If the character is in the
+    ADDRESS-1E8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;range '0' to '9', it is converted to the equivalent decimal value.
+    ADDRESS-1E8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Characters not in the range '0' to '9' are signified by the return
+    ADDRESS-1E8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;with the CARRY flag set.
+    ADDRESS-1E8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-1E8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Registers used s0.
+    ADDRESS-1E8
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-1E8
+      LABEL-1char_to_value
+INSTRUCTION-ADD
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-C6
+  OP2 VALUE-C6
+    COMMENT-;reject character codes above '9' (39 hex)
+    ADDRESS-1E9
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-C
+  OP1 VALUE-C
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;carry flag is set
+    ADDRESS-1EA
+      LABEL-
+INSTRUCTION-SUB
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-F6
+  OP2 VALUE-F6
+    COMMENT-;reject character codes below '0' (30 hex)
+    ADDRESS-1EB
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;carry is set if value not in range
+    ADDRESS-1EC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-1EC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-1EC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Determine the numerical value of a two character decimal string held in
+    ADDRESS-1EC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;scratch pad memory such the result is in the range 0 to 99 (00 to 63 hex).
+    ADDRESS-1EC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-1EC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The string must be stored as in two consecutive memory locations and the
+    ADDRESS-1EC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;location of the first (tens) character supplied in the s1 register.
+    ADDRESS-1EC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The result is provided in register s2. Strings not using characters in the
+    ADDRESS-1EC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;range '0' to '9' are signified by the return with the CARRY flag set.
+    ADDRESS-1EC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-1EC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Registers used s0, s1 and s2.
+    ADDRESS-1EC
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-1EC
+      LABEL-2char_to_value
+INSTRUCTION-FETCH
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-(s1)
+  OP2 VALUE-(s1)
+    COMMENT-;read 'tens' character
+    ADDRESS-1ED
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-1char_to_value
+  OP1 VALUE-1E8
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;convert to numerical value
+    ADDRESS-1EE
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-C
+  OP1 VALUE-C
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;bad character - CARRY set
+    ADDRESS-1EF
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-s0
+  OP2 VALUE-s0
+    COMMENT-
+    ADDRESS-1F0
+      LABEL-
+INSTRUCTION-SL0
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;multiply 'tens' value by 10 (0A hex)
+    ADDRESS-1F1
+      LABEL-
+INSTRUCTION-SL0
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-1F2
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-s0
+  OP2 VALUE-s0
+    COMMENT-
+    ADDRESS-1F3
+      LABEL-
+INSTRUCTION-SL0
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-1F4
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s1
+  OP1 VALUE-s1
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;read 'units' character
+    ADDRESS-1F5
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s0
+  OP1 VALUE-s0
+   OPERAND2-(s1)
+  OP2 VALUE-(s1)
+    COMMENT-
+    ADDRESS-1F6
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-1char_to_value
+  OP1 VALUE-1E8
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;convert to numerical value
+    ADDRESS-1F7
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-C
+  OP1 VALUE-C
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;bad character - CARRY set
+    ADDRESS-1F8
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+  OP1 VALUE-s2
+   OPERAND2-s0
+  OP2 VALUE-s0
+    COMMENT-;add units to result and clear CARRY flag
+    ADDRESS-1F9
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-1FA
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-1FA
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-1FA
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Interrupt service routine (ISR)
+    ADDRESS-1FA
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-1FA
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The interrupt is used to increment a 16-bit counter formed with two registers
+    ADDRESS-1FA
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;called [int_counter_msb,int_counter_lsb]. This provides a count of the number
+    ADDRESS-1FA
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;of micro-seconds elapsed. The counter is 'free running' in that it will count
+    ADDRESS-1FA
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;up to 65,535 and then roll over to zero. The count value is then used in other
+    ADDRESS-1FA
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;parts of the program as required and where it is less time critical.
+    ADDRESS-1FA
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-1FA
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;The ISR only uses the specified counter registers
+    ADDRESS-1FA
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-3FC
+      LABEL-
+INSTRUCTION-ADDRESS
+   OPERAND1-3FC
+  OP1 VALUE-3FC
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-3FC
+      LABEL-ISR
+INSTRUCTION-ADD
+   OPERAND1-int_counter_lsb
+  OP1 VALUE-sD
+   OPERAND2-01
+  OP2 VALUE-01
+    COMMENT-;add 1us to 16-bit counter
+    ADDRESS-3FD
+      LABEL-
+INSTRUCTION-ADDCY
+   OPERAND1-int_counter_msb
+  OP1 VALUE-sC
+   OPERAND2-00
+  OP2 VALUE-00
+    COMMENT-
+    ADDRESS-3FE
+      LABEL-
+INSTRUCTION-RETURNI
+   OPERAND1-ENABLE
+  OP1 VALUE-ENABLE
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Interrupt vector
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-ADDRESS
+   OPERAND1-3FF
+  OP1 VALUE-3FF
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-ISR
+  OP1 VALUE-3FC
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;Useful constants
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;ASCII table
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_a
+  OP1 VALUE-character_a
+   OPERAND2-61
+  OP2 VALUE-61
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_b
+  OP1 VALUE-character_b
+   OPERAND2-62
+  OP2 VALUE-62
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_c
+  OP1 VALUE-character_c
+   OPERAND2-63
+  OP2 VALUE-63
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_d
+  OP1 VALUE-character_d
+   OPERAND2-64
+  OP2 VALUE-64
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_e
+  OP1 VALUE-character_e
+   OPERAND2-65
+  OP2 VALUE-65
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_f
+  OP1 VALUE-character_f
+   OPERAND2-66
+  OP2 VALUE-66
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_g
+  OP1 VALUE-character_g
+   OPERAND2-67
+  OP2 VALUE-67
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_h
+  OP1 VALUE-character_h
+   OPERAND2-68
+  OP2 VALUE-68
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_i
+  OP1 VALUE-character_i
+   OPERAND2-69
+  OP2 VALUE-69
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_j
+  OP1 VALUE-character_j
+   OPERAND2-6A
+  OP2 VALUE-6A
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_k
+  OP1 VALUE-character_k
+   OPERAND2-6B
+  OP2 VALUE-6B
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_l
+  OP1 VALUE-character_l
+   OPERAND2-6C
+  OP2 VALUE-6C
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_m
+  OP1 VALUE-character_m
+   OPERAND2-6D
+  OP2 VALUE-6D
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_n
+  OP1 VALUE-character_n
+   OPERAND2-6E
+  OP2 VALUE-6E
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_o
+  OP1 VALUE-character_o
+   OPERAND2-6F
+  OP2 VALUE-6F
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_p
+  OP1 VALUE-character_p
+   OPERAND2-70
+  OP2 VALUE-70
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_q
+  OP1 VALUE-character_q
+   OPERAND2-71
+  OP2 VALUE-71
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_r
+  OP1 VALUE-character_r
+   OPERAND2-72
+  OP2 VALUE-72
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_s
+  OP1 VALUE-character_s
+   OPERAND2-73
+  OP2 VALUE-73
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_t
+  OP1 VALUE-character_t
+   OPERAND2-74
+  OP2 VALUE-74
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_u
+  OP1 VALUE-character_u
+   OPERAND2-75
+  OP2 VALUE-75
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_v
+  OP1 VALUE-character_v
+   OPERAND2-76
+  OP2 VALUE-76
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_w
+  OP1 VALUE-character_w
+   OPERAND2-77
+  OP2 VALUE-77
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_x
+  OP1 VALUE-character_x
+   OPERAND2-78
+  OP2 VALUE-78
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_y
+  OP1 VALUE-character_y
+   OPERAND2-79
+  OP2 VALUE-79
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_z
+  OP1 VALUE-character_z
+   OPERAND2-7A
+  OP2 VALUE-7A
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_A
+  OP1 VALUE-character_A
+   OPERAND2-41
+  OP2 VALUE-41
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_B
+  OP1 VALUE-character_B
+   OPERAND2-42
+  OP2 VALUE-42
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_C
+  OP1 VALUE-character_C
+   OPERAND2-43
+  OP2 VALUE-43
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_D
+  OP1 VALUE-character_D
+   OPERAND2-44
+  OP2 VALUE-44
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_E
+  OP1 VALUE-character_E
+   OPERAND2-45
+  OP2 VALUE-45
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_F
+  OP1 VALUE-character_F
+   OPERAND2-46
+  OP2 VALUE-46
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_G
+  OP1 VALUE-character_G
+   OPERAND2-47
+  OP2 VALUE-47
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_H
+  OP1 VALUE-character_H
+   OPERAND2-48
+  OP2 VALUE-48
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_I
+  OP1 VALUE-character_I
+   OPERAND2-49
+  OP2 VALUE-49
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_J
+  OP1 VALUE-character_J
+   OPERAND2-4A
+  OP2 VALUE-4A
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_K
+  OP1 VALUE-character_K
+   OPERAND2-4B
+  OP2 VALUE-4B
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_L
+  OP1 VALUE-character_L
+   OPERAND2-4C
+  OP2 VALUE-4C
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_M
+  OP1 VALUE-character_M
+   OPERAND2-4D
+  OP2 VALUE-4D
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_N
+  OP1 VALUE-character_N
+   OPERAND2-4E
+  OP2 VALUE-4E
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_O
+  OP1 VALUE-character_O
+   OPERAND2-4F
+  OP2 VALUE-4F
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_P
+  OP1 VALUE-character_P
+   OPERAND2-50
+  OP2 VALUE-50
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_Q
+  OP1 VALUE-character_Q
+   OPERAND2-51
+  OP2 VALUE-51
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_R
+  OP1 VALUE-character_R
+   OPERAND2-52
+  OP2 VALUE-52
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_S
+  OP1 VALUE-character_S
+   OPERAND2-53
+  OP2 VALUE-53
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_T
+  OP1 VALUE-character_T
+   OPERAND2-54
+  OP2 VALUE-54
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_U
+  OP1 VALUE-character_U
+   OPERAND2-55
+  OP2 VALUE-55
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_V
+  OP1 VALUE-character_V
+   OPERAND2-56
+  OP2 VALUE-56
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_W
+  OP1 VALUE-character_W
+   OPERAND2-57
+  OP2 VALUE-57
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_X
+  OP1 VALUE-character_X
+   OPERAND2-58
+  OP2 VALUE-58
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_Y
+  OP1 VALUE-character_Y
+   OPERAND2-59
+  OP2 VALUE-59
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_Z
+  OP1 VALUE-character_Z
+   OPERAND2-5A
+  OP2 VALUE-5A
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_0
+  OP1 VALUE-character_0
+   OPERAND2-30
+  OP2 VALUE-30
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_1
+  OP1 VALUE-character_1
+   OPERAND2-31
+  OP2 VALUE-31
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_2
+  OP1 VALUE-character_2
+   OPERAND2-32
+  OP2 VALUE-32
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_3
+  OP1 VALUE-character_3
+   OPERAND2-33
+  OP2 VALUE-33
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_4
+  OP1 VALUE-character_4
+   OPERAND2-34
+  OP2 VALUE-34
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_5
+  OP1 VALUE-character_5
+   OPERAND2-35
+  OP2 VALUE-35
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_6
+  OP1 VALUE-character_6
+   OPERAND2-36
+  OP2 VALUE-36
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_7
+  OP1 VALUE-character_7
+   OPERAND2-37
+  OP2 VALUE-37
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_8
+  OP1 VALUE-character_8
+   OPERAND2-38
+  OP2 VALUE-38
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_9
+  OP1 VALUE-character_9
+   OPERAND2-39
+  OP2 VALUE-39
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_colon
+  OP1 VALUE-character_colon
+   OPERAND2-3A
+  OP2 VALUE-3A
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_semi_colon
+  OP1 VALUE-character_semi_colon
+   OPERAND2-3B
+  OP2 VALUE-3B
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_less_than
+  OP1 VALUE-character_less_than
+   OPERAND2-3C
+  OP2 VALUE-3C
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_greater_than
+  OP1 VALUE-character_greater_than
+   OPERAND2-3E
+  OP2 VALUE-3E
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_equals
+  OP1 VALUE-character_equals
+   OPERAND2-3D
+  OP2 VALUE-3D
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_space
+  OP1 VALUE-character_space
+   OPERAND2-20
+  OP2 VALUE-20
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_CR
+  OP1 VALUE-character_CR
+   OPERAND2-0D
+  OP2 VALUE-0D
+    COMMENT-;carriage return
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_question
+  OP1 VALUE-character_question
+   OPERAND2-3F
+  OP2 VALUE-3F
+    COMMENT-;'?'
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_dollar
+  OP1 VALUE-character_dollar
+   OPERAND2-24
+  OP2 VALUE-24
+    COMMENT-
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_BS
+  OP1 VALUE-character_BS
+   OPERAND2-08
+  OP2 VALUE-08
+    COMMENT-;Back Space command character
+    ADDRESS-3FF
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+  OP1 VALUE-
+   OPERAND2-
+  OP2 VALUE-
+    COMMENT-;

@@ -1,0 +1,5040 @@
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;KCPSM3 Program - Real Time Clock with UART communication.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Ken Chapman - Xilinx Ltd - October 2003
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Port definitions
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-UART_status_port
+   OPERAND2-00
+    COMMENT-;UART status input
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-tx_half_full
+   OPERAND2-01
+    COMMENT-;  Transmitter     half full - bit0
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-tx_full
+   OPERAND2-02
+    COMMENT-;    FIFO               full - bit1
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-rx_half_full
+   OPERAND2-04
+    COMMENT-;  Receiver        half full - bit2
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-rx_full
+   OPERAND2-08
+    COMMENT-;    FIFO               full - bit3
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-rx_data_present
+   OPERAND2-10
+    COMMENT-;               data present - bit4
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-UART_read_port
+   OPERAND2-01
+    COMMENT-;UART Rx data input
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-UART_write_port
+   OPERAND2-01
+    COMMENT-;UART Tx data output
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-alarm_port
+   OPERAND2-00
+    COMMENT-;Alarm output
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-alarm_control
+   OPERAND2-01
+    COMMENT-;     bit0
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Special Register usage
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-NAMEREG
+   OPERAND1-sF
+   OPERAND2-UART_data
+    COMMENT-;used to pass data to and from the UART
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-NAMEREG
+   OPERAND1-sE
+   OPERAND2-store_pointer
+    COMMENT-;used to pass location of data in scratch pad memory
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Two registers to form a 16-bit counter used to count
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;interrupt pulses generated at 1us intervals.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-NAMEREG
+   OPERAND1-sD
+   OPERAND2-int_counter_lsb
+    COMMENT-;lower 8-bits
+      LABEL-
+INSTRUCTION-NAMEREG
+   OPERAND1-sC
+   OPERAND2-int_counter_msb
+    COMMENT-;upper 8-bits
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Scratch Pad Memory Locations
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-us_time_stamp_lsb
+   OPERAND2-00
+    COMMENT-;16-bit micro-second time stamp
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-us_time_stamp_msb
+   OPERAND2-01
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-us_time_lsb
+   OPERAND2-02
+    COMMENT-;16-bit micro-second real time value
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-us_time_msb
+   OPERAND2-03
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-ms_time_lsb
+   OPERAND2-04
+    COMMENT-;16-bit milli-second real time value
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-ms_time_msb
+   OPERAND2-05
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-real_time_hours
+   OPERAND2-06
+    COMMENT-;Current clock time
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-real_time_minutes
+   OPERAND2-07
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-real_time_seconds
+   OPERAND2-08
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-alarm_time_hours
+   OPERAND2-09
+    COMMENT-;Alarm time
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-alarm_time_minutes
+   OPERAND2-0A
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-alarm_time_seconds
+   OPERAND2-0B
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-alarm_status
+   OPERAND2-0C
+    COMMENT-;Alarm status
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-alarm_active
+   OPERAND2-01
+    COMMENT-;    bit0 - Alarm is active
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-alarm_armed
+   OPERAND2-02
+    COMMENT-;    bit1 - Alarm is armed
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-time_preserve0
+   OPERAND2-10
+    COMMENT-;storage for protection of registers
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-time_preserve1
+   OPERAND2-11
+    COMMENT-;used by the real time clock routine.
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-time_preserve2
+   OPERAND2-12
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-time_preserve3
+   OPERAND2-13
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-time_preserve4
+   OPERAND2-14
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-time_preserve5
+   OPERAND2-15
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;UART character strings will be stored in scratch pad memory ending in carriage return.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;A string can be up to 16 characters with the start location defined by this constant.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-string_start
+   OPERAND2-20
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Initialise the system
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-cold_start
+INSTRUCTION-LOAD
+   OPERAND1-s0
+   OPERAND2-00
+    COMMENT-;clear all time values
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-us_time_stamp_lsb
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-us_time_stamp_msb
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-us_time_lsb
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-us_time_msb
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-ms_time_lsb
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-ms_time_msb
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-real_time_hours
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-real_time_minutes
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-real_time_seconds
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-alarm_time_hours
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-alarm_time_minutes
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-alarm_time_seconds
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-alarm_status
+    COMMENT-;clear and disable alarm
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-alarm_drive
+   OPERAND2-
+    COMMENT-;turn off alarm control output port
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-int_counter_lsb
+   OPERAND2-00
+    COMMENT-;clear 'us' interrupt counter
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-int_counter_msb
+   OPERAND2-00
+    COMMENT-
+      LABEL-
+INSTRUCTION-ENABLE
+   OPERAND1-INTERRUPT
+   OPERAND2-
+    COMMENT-;enable the 1us interrupts
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Start of the main program loop.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;A prompt is transmitted to the UART transmitter and then
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;a command can be entered and interpreted.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-prompt_input
+INSTRUCTION-CALL
+   OPERAND1-send_prompt
+   OPERAND2-
+    COMMENT-;Prompt 'KCPSM3>'
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-receive_string
+   OPERAND2-
+    COMMENT-;obtain input string and maintain the time
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Parse the string and perform actions as required
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s1
+   OPERAND2-string_start
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_CR
+    COMMENT-;carriage return does nothing
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+   OPERAND2-prompt_input
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_T
+    COMMENT-;start of 'TIME' command?
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+   OPERAND2-test_for_TIME
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_A
+    COMMENT-;start of 'ALARM' command?
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+   OPERAND2-test_for_ALARM
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;trap other command starts here
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-bad_input_command
+INSTRUCTION-CALL
+   OPERAND1-send_Syntax_Error
+   OPERAND2-
+    COMMENT-;no valid command
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+   OPERAND2-prompt_input
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-test_for_TIME
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_I
+    COMMENT-;test for rest of 'TIME'
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-bad_input_command
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_M
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-bad_input_command
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_E
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-bad_input_command
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;now have a valid TIME command to process
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_CR
+    COMMENT-;carriage return means display time
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-set_time_command
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-transmit_time
+   OPERAND2-
+    COMMENT-;transmit time to UART
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-prompt_input
+   OPERAND2-
+    COMMENT-
+      LABEL-set_time_command
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_space
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-bad_input_command
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-test_time_string
+   OPERAND2-
+    COMMENT-;interpret 'hh:mm:ss' string
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-C
+   OPERAND2-prompt_input
+    COMMENT-;test for invalid input
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s6
+   OPERAND2-real_time_hours
+    COMMENT-;set new time into clock
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s5
+   OPERAND2-real_time_minutes
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s4
+   OPERAND2-real_time_seconds
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-ms_time_lsb
+    COMMENT-;clear 'ms' counter (s0=00)
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-ms_time_msb
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-transmit_time
+   OPERAND2-
+    COMMENT-;transmit new time to UART
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-prompt_input
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-test_for_ALARM
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_L
+    COMMENT-;test for rest of 'ALARM'
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-bad_input_command
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_A
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-bad_input_command
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_R
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-bad_input_command
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_M
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-bad_input_command
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;now have a valid ALARM command to process
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_CR
+    COMMENT-;carriage return means display alarm time
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-set_alarm_command
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-transmit_alarm_time
+   OPERAND2-
+    COMMENT-;transmit time to UART
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-prompt_input
+   OPERAND2-
+    COMMENT-
+      LABEL-set_alarm_command
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_space
+    COMMENT-;test for ON or OFF command
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-bad_input_command
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_O
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+   OPERAND2-set_alarm_on_off
+    COMMENT-
+      LABEL-
+INSTRUCTION-SUB
+   OPERAND1-s1
+   OPERAND2-01
+    COMMENT-;move memory pointer back to first character of 'hh:mm:ss' string
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-test_time_string
+   OPERAND2-
+    COMMENT-;interpret 'hh:mm:ss' string
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-C
+   OPERAND2-prompt_input
+    COMMENT-;test for invalid input
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s6
+   OPERAND2-alarm_time_hours
+    COMMENT-;set new time into clock
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s5
+   OPERAND2-alarm_time_minutes
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s4
+   OPERAND2-alarm_time_seconds
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-transmit_alarm_time
+   OPERAND2-
+    COMMENT-;transmit new alarm time and status
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-prompt_input
+   OPERAND2-
+    COMMENT-
+      LABEL-set_alarm_on_off
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_N
+    COMMENT-;test for 'ON'
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-test_OFF
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_CR
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-bad_input_command
+    COMMENT-
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s0
+   OPERAND2-alarm_status
+    COMMENT-;turn alarm on
+      LABEL-
+INSTRUCTION-OR
+   OPERAND1-s0
+   OPERAND2-alarm_armed
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-alarm_status
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-transmit_alarm_time
+   OPERAND2-
+    COMMENT-;transmit alarm time and status
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-prompt_input
+   OPERAND2-
+    COMMENT-
+      LABEL-test_OFF
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_F
+    COMMENT-;test for for 'OFF'
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-bad_input_command
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_F
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-bad_input_command
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_CR
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-bad_input_command
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s0
+   OPERAND2-00
+    COMMENT-;turn alarm off and stop an active alarm
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-alarm_status
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-alarm_drive
+   OPERAND2-
+    COMMENT-;turn off alarm
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-transmit_alarm_time
+   OPERAND2-
+    COMMENT-;transmit alarm time and status
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-prompt_input
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Read an 'hh:mm:ss' time string and provide new values.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The string must be provided in successive scratch pad memory locations
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;with the s1 register containing the location of the first character.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;A correct time specification will result in the return of new values
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;as follows:-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;       s6 = hours
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;       s5 = minutes
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;       s4 = seconds
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;If the syntax is incorrect or values are not in the correct ranges an
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;'Invalid Time' message will be transmitted and the CARRY flag will be set
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Registers used s0, s1, s6, s5 and s4
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-test_time_string
+INSTRUCTION-CALL
+   OPERAND1-2char_to_value
+   OPERAND2-
+    COMMENT-;obtain hours value
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-C
+   OPERAND2-invalid_time
+    COMMENT-;test for non-decimal characters
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s6
+   OPERAND2-s2
+    COMMENT-;remember hours
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s1
+   OPERAND2-01
+    COMMENT-;increment memory pointer past hours
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_colon
+    COMMENT-;test for colon
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-invalid_time
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-2char_to_value
+   OPERAND2-
+    COMMENT-;obtain minutes value
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-C
+   OPERAND2-invalid_time
+    COMMENT-;test for non-decimal characters
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s5
+   OPERAND2-s2
+    COMMENT-;remember minutes
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s1
+   OPERAND2-01
+    COMMENT-;increment memory pointer past minutes
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_colon
+    COMMENT-;test for colon
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-invalid_time
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-2char_to_value
+   OPERAND2-
+    COMMENT-;obtain seconds value
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-C
+   OPERAND2-invalid_time
+    COMMENT-;test for non-decimal characters
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s4
+   OPERAND2-s2
+    COMMENT-;remember minutes
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s1
+   OPERAND2-01
+    COMMENT-;increment memory pointer past seconds
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-fetch_char_from_memory
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-character_CR
+    COMMENT-;finish with carriage return
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-invalid_time
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Have values for hh:mm:ss but need to test if each is valid range.
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s6
+   OPERAND2-hours_in_a_day
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NC
+   OPERAND2-invalid_time
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s5
+   OPERAND2-minutes_in_an_hour
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NC
+   OPERAND2-invalid_time
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s4
+   OPERAND2-seconds_in_a_minute
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NC
+   OPERAND2-invalid_time
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s0
+   OPERAND2-00
+    COMMENT-
+      LABEL-
+INSTRUCTION-SR0
+   OPERAND1-s0
+   OPERAND2-
+    COMMENT-;reset CARRY flag (with s0=0)
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;time string was OK
+      LABEL-invalid_time
+INSTRUCTION-CALL
+   OPERAND1-send_Invalid
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_space
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_Time
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s0
+   OPERAND2-01
+    COMMENT-
+      LABEL-
+INSTRUCTION-SR0
+   OPERAND1-s0
+   OPERAND2-
+    COMMENT-;set CARRY flag
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;time string was bad
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Fetch character from memory, convert to upper case
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;and increment memory pointer.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The memory pointer is provided in register s1.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The character obtained is returned in register s0.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Registers used s0 and s1.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-fetch_char_from_memory
+INSTRUCTION-FETCH
+   OPERAND1-s0
+   OPERAND2-(s1)
+    COMMENT-;read character
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-upper_case
+   OPERAND2-
+    COMMENT-;convert to upper case
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s1
+   OPERAND2-01
+    COMMENT-;increment memory pointer
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Read one character from the UART
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Character read will be returned in a register called 'UART_data' and will be
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;echoed to the UART transmitter.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The routine first tests the receiver FIFO buffer to see if data is present.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;If the FIFO is empty, the routine waits until there is a character to read.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;As this could take any amount of time the wait loop includes a call to the
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;subroutine which updates the real time clock.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Registers used s0 and UART_data
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-read_from_UART
+INSTRUCTION-INPUT
+   OPERAND1-s0
+   OPERAND2-UART_status_port
+    COMMENT-;test Rx_FIFO buffer
+      LABEL-
+INSTRUCTION-TEST
+   OPERAND1-s0
+   OPERAND2-rx_data_present
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-read_character
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-update_time
+   OPERAND2-
+    COMMENT-;Perform useful operation whilst waiting
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-read_from_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-read_character
+INSTRUCTION-INPUT
+   OPERAND1-UART_data
+   OPERAND2-UART_read_port
+    COMMENT-;read from FIFO
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-;echo received character
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Transmit one character to the UART
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Character supplied in register called 'UART_data'.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The routine first tests the transmit FIFO buffer to see if it is full.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;If the FIFO is full, the routine waits until there is space which could
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;be as long as it takes to transmit one complete character.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;    Baud Rate    Time per Character (10 bits)
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;      9600           1,024us
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;     19200             521us
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;     38400             260us
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;     57600             174us
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;    115200              87us
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Since this is a relatively long duration, the wait loop includes a
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;call to the subroutine which updates the real time clock.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Registers used s0
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-send_to_UART
+INSTRUCTION-INPUT
+   OPERAND1-s0
+   OPERAND2-UART_status_port
+    COMMENT-;test Tx_FIFO buffer
+      LABEL-
+INSTRUCTION-TEST
+   OPERAND1-s0
+   OPERAND2-tx_full
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+   OPERAND2-UART_write
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-update_time
+   OPERAND2-
+    COMMENT-;Perform useful operation whilst waiting
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-UART_write
+INSTRUCTION-OUTPUT
+   OPERAND1-UART_data
+   OPERAND2-UART_write_port
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Alarm output
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Uses the alarm status scratch pad memory to set or reset the alarm
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;control bit on the alarm output port.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Registers used s0
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-alarm_drive
+INSTRUCTION-FETCH
+   OPERAND1-s0
+   OPERAND2-alarm_status
+    COMMENT-;read status
+      LABEL-
+INSTRUCTION-AND
+   OPERAND1-s0
+   OPERAND2-alarm_active
+    COMMENT-;isolate bit0
+      LABEL-
+INSTRUCTION-OUTPUT
+   OPERAND1-s0
+   OPERAND2-alarm_port
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Transmit the time to the UART port in the format hh:mm:ss and end
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;with a carriage return.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The time to converted must be stored in 3 scratch pad memory locations as
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;defined below. A register named 'store_pointer' must provide the address of
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;first location.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;        Address                Data
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;     store_pointer      ----> hours
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;     store_pointer + 1  ----> minutes
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;     store_pointer + 1  ----> seconds
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The routine first converts the time into an ASCII string stored in scratch
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;pad memory starting at a location specified by a constant named 'string_start'.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The string will then be transmitted.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Registers used s0, s1, s2, 'store_pointer' and 'UART_data'.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-transmit_time
+INSTRUCTION-LOAD
+   OPERAND1-store_pointer
+   OPERAND2-real_time_hours
+    COMMENT-;locate current time in memory
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-time_to_ASCII
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-transmit_string
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Transmit the alarm time and status to the UART port in the format hh:mm:ss and
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;ending with carriage return.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The alarm time to converted must be stored in 3 scratch pad memory locations as
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;defined below. A register named 'store_pointer' must provide the address of
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;first location.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;        Address                Data
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;     store_pointer      ----> hours
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;     store_pointer + 1  ----> minutes
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;     store_pointer + 1  ----> seconds
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The routine first converts the time into an ASCII string stored in scratch
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;pad memory starting at a location specified by a constant named 'string_start'.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The string will then be transmitted.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Registers used s0, s1, s2, 'store_pointer' and 'UART_data'.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-transmit_alarm_time
+INSTRUCTION-LOAD
+   OPERAND1-store_pointer
+   OPERAND2-alarm_time_hours
+    COMMENT-;locate alarm time in memory
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-time_to_ASCII
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-transmit_string
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_Alarm
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_space
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s0
+   OPERAND2-alarm_status
+    COMMENT-;read alarm status
+      LABEL-
+INSTRUCTION-TEST
+   OPERAND1-s0
+   OPERAND2-alarm_active
+    COMMENT-;test for active
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+   OPERAND2-test_armed
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_Active
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-test_armed
+INSTRUCTION-TEST
+   OPERAND1-s0
+   OPERAND2-alarm_armed
+    COMMENT-;test for on
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+   OPERAND2-alarm_is_off
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_ON
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-alarm_is_off
+INSTRUCTION-CALL
+   OPERAND1-send_OFF
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Transmit ASCII string to UART
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;An ASCII string must be provided in scratch pad memory commencing at the
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;location specified by a constant named 'string_start'. The string must
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;end with a carriage return (0D).
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Registers used s1 and 'UART_data'.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;               s0 is then used in subroutine 'send_to_UART'
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-transmit_string
+INSTRUCTION-LOAD
+   OPERAND1-s1
+   OPERAND2-string_start
+    COMMENT-;locate start of string
+      LABEL-next_char_tx
+INSTRUCTION-FETCH
+   OPERAND1-UART_data
+   OPERAND2-(s1)
+    COMMENT-;read character from memory
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-;transmit character
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-UART_data
+   OPERAND2-character_CR
+    COMMENT-;test for last character
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-Z
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s1
+   OPERAND2-01
+    COMMENT-;move to next character
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-next_char_tx
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Receive ASCII string from UART
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;An ASCII string will be read from the UART and stored in scratch pad memory
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;commencing at the location specified by a constant named 'string_start'.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The string will will have a maximum length of 16 characters including a
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;carriage return (0D) denoting the end of the string.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;As each character is read, it is echoed to the UART transmitter.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Some minor editing is supported using backspace (BS=08) which is used
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;to adjust what is stored in scratch pad memory and adjust the display
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;on the terminal screen using characters sent to the UART transmitter.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;A test is made for the receiver FIFO becoming full. A full status is treated as
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;a potential error situation and will result in a 'Overflow Error' message being
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;transmitted to the UART, the receiver FIFO being purged of all data and an
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;empty string being stored (carriage return at first location).
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Registers used s0, s1, s2 and 'UART_data'.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-receive_string
+INSTRUCTION-LOAD
+   OPERAND1-s1
+   OPERAND2-string_start
+    COMMENT-;locate start of string
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s2
+   OPERAND2-s1
+    COMMENT-;compute 16 character address
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+   OPERAND2-10
+    COMMENT-
+      LABEL-receive_full_test
+INSTRUCTION-INPUT
+   OPERAND1-s0
+   OPERAND2-UART_status_port
+    COMMENT-;test Rx_FIFO buffer for full
+      LABEL-
+INSTRUCTION-TEST
+   OPERAND1-s0
+   OPERAND2-rx_full
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-read_error
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-read_from_UART
+   OPERAND2-
+    COMMENT-;obtain and echo character
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-UART_data
+   OPERAND2-(s1)
+    COMMENT-;write to memory
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-UART_data
+   OPERAND2-character_CR
+    COMMENT-;test for end of string
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-Z
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-UART_data
+   OPERAND2-character_BS
+    COMMENT-;test for back space
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+   OPERAND2-BS_edit
+    COMMENT-
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s1
+   OPERAND2-01
+    COMMENT-;increment memory pointer
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s1
+   OPERAND2-s2
+    COMMENT-;test for pointer exceeding 16 characters
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-receive_full_test
+    COMMENT-;next character
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_backspace
+   OPERAND2-
+    COMMENT-;hold end of string position on terminal display
+      LABEL-BS_edit
+INSTRUCTION-SUB
+   OPERAND1-s1
+   OPERAND2-01
+    COMMENT-;memory pointer back one
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s1
+   OPERAND2-string_start
+    COMMENT-;test for under flow
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-C
+   OPERAND2-string_start_again
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_space
+   OPERAND2-
+    COMMENT-;clear character at current position
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_backspace
+   OPERAND2-
+    COMMENT-;position cursor
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-receive_full_test
+   OPERAND2-
+    COMMENT-;next character
+      LABEL-string_start_again
+INSTRUCTION-CALL
+   OPERAND1-send_greater_than
+   OPERAND2-
+    COMMENT-;restore '>' at prompt
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-receive_string
+   OPERAND2-
+    COMMENT-;begin again
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Receiver buffer overflow condition
+      LABEL-read_error
+INSTRUCTION-CALL
+   OPERAND1-send_CR
+   OPERAND2-
+    COMMENT-;Transmit error message
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-UART_data
+   OPERAND2-string_start
+    COMMENT-;empty string in memory (start with CR)
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_Overflow_Error
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_CR
+   OPERAND2-
+    COMMENT-
+      LABEL-clear_UART_Rx_loop
+INSTRUCTION-INPUT
+   OPERAND1-s0
+   OPERAND2-UART_status_port
+    COMMENT-;test Rx_FIFO buffer for data
+      LABEL-
+INSTRUCTION-TEST
+   OPERAND1-s0
+   OPERAND2-rx_data_present
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-Z
+   OPERAND2-
+    COMMENT-;finish when buffer is empty
+      LABEL-
+INSTRUCTION-INPUT
+   OPERAND1-UART_data
+   OPERAND2-UART_read_port
+    COMMENT-;read from FIFO and ignore
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-clear_UART_Rx_loop
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Send Carriage Return to the UART
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-send_CR
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_CR
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Send a space to the UART
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-send_space
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_space
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Send a back space to the UART
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-send_backspace
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_BS
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Send 'Syntax Error' to the UART
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-send_Syntax_Error
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_S
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_y
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_n
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_t
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_a
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_x
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-send_space_Error
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Send 'Overflow Error' to the UART
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-send_Overflow_Error
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_O
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_v
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_e
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_r
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_f
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_l
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_o
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_w
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-send_space_Error
+INSTRUCTION-CALL
+   OPERAND1-send_space
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Send 'Error' to the UART
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-send_Error
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_E
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_r
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_o
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_r
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Send 'KCPSM3>' prompt to the UART
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-send_prompt
+INSTRUCTION-CALL
+   OPERAND1-send_CR
+   OPERAND2-
+    COMMENT-;start new line
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_K
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_C
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_P
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_S
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_M
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_3
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Send '>' character to the UART
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-send_greater_than
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_greater_than
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Send 'Invalid' string to the UART
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-send_Invalid
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_I
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_n
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_v
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_a
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_l
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_i
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_d
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Send 'Time' string to the UART
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-send_Time
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_T
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_i
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_m
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_e
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Send 'Alarm' string to the UART
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-send_Alarm
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_A
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_l
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_a
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_r
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_m
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Send 'OFF' string to the UART
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-send_OFF
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_O
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_F
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Send 'ON' string to the UART
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-send_ON
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_O
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_N
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Send 'Active' string to the UART
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-send_Active
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_A
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_c
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_t
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_i
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_v
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-UART_data
+   OPERAND2-character_e
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-send_to_UART
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Convert time to ASCII string in scratch pad memory.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The time to converted must be stored in 3 scratch pad memory locations as
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;defined below. A register named 'store_pointer' must provide the address of
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;first location.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;        Address                Data
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;     store_pointer      ----> hours
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;     store_pointer + 1  ----> minutes
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;     store_pointer + 1  ----> seconds
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The resulting ASCII string will be stored in scratch pad memory starting at
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;a location specified by a constant named 'string_start'. The string will
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;take the format hh:mm:ss and end with a carriage return.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Registers used s0, s1, s2 and 'store_pointer'.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-time_to_ASCII
+INSTRUCTION-LOAD
+   OPERAND1-s2
+   OPERAND2-string_start
+    COMMENT-;location for string
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s0
+   OPERAND2-(store_pointer)
+    COMMENT-;read hours value
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-decimal_to_ASCII
+   OPERAND2-
+    COMMENT-;convert to ASCII
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s1
+   OPERAND2-(s2)
+    COMMENT-;write hours to string
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+   OPERAND2-01
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-(s2)
+    COMMENT-
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+   OPERAND2-01
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s0
+   OPERAND2-character_colon
+    COMMENT-;write ':' to string
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-(s2)
+    COMMENT-
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+   OPERAND2-01
+    COMMENT-
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-store_pointer
+   OPERAND2-01
+    COMMENT-;move to minutes
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s0
+   OPERAND2-(store_pointer)
+    COMMENT-;read minutes value
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-decimal_to_ASCII
+   OPERAND2-
+    COMMENT-;convert to ASCII
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s1
+   OPERAND2-(s2)
+    COMMENT-;write minutes to string
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+   OPERAND2-01
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-(s2)
+    COMMENT-
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+   OPERAND2-01
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s0
+   OPERAND2-character_colon
+    COMMENT-;write ':' to string
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-(s2)
+    COMMENT-
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+   OPERAND2-01
+    COMMENT-
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-store_pointer
+   OPERAND2-01
+    COMMENT-;move to seconds
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s0
+   OPERAND2-(store_pointer)
+    COMMENT-;read seconds value
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-decimal_to_ASCII
+   OPERAND2-
+    COMMENT-;convert to ASCII
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s1
+   OPERAND2-(s2)
+    COMMENT-;write seconds to string
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+   OPERAND2-01
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-(s2)
+    COMMENT-
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+   OPERAND2-01
+    COMMENT-
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s0
+   OPERAND2-character_CR
+    COMMENT-;finish string with carriage return
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-(s2)
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Convert value provided in register s0 into ASCII characters
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The value provided must in the range 0 to 99 and will be converted into
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;two ASCII characters.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;     The number of 'tens' will be representd by an ASCII character returned in register s1.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;     The number of 'units' will be representd by an ASCII character returned in register s0.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The ASCII representations of '0' to '9' are 30 to 39 hexadecimal which is simply 30 hex added to
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;the actual decimal value.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Registers used s0 and s1.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-decimal_to_ASCII
+INSTRUCTION-LOAD
+   OPERAND1-s1
+   OPERAND2-30
+    COMMENT-;load 'tens' counter with ASCII for '0'
+      LABEL-test_for_ten
+INSTRUCTION-ADD
+   OPERAND1-s1
+   OPERAND2-01
+    COMMENT-;increment 'tens' value
+      LABEL-
+INSTRUCTION-SUB
+   OPERAND1-s0
+   OPERAND2-0A
+    COMMENT-;try to subtract 10 from the supplied value
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NC
+   OPERAND2-test_for_ten
+    COMMENT-;repeat if subtraction was possible without underflow.
+      LABEL-
+INSTRUCTION-SUB
+   OPERAND1-s1
+   OPERAND2-01
+    COMMENT-;'tens' value one less ten due to underflow
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s0
+   OPERAND2-3A
+    COMMENT-;restore units value (the remainder) and convert to ASCII
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Real Time Clock
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Uses the 1us interrupt counter [int_counter_msb,int_counter_lsb] to determine how many
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;micro-seconds have elapsed since the last update. This allows for just over 65ms between
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;updates. Complete multiples of 1000us are used to update a 16-bit milli-second counter held
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;in scratch pad memory locations [ms_time_stamp_msb,ms_time_stamp_msb] which in turn
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;is used to update the real time hours, minutes and seconds clock held in scratch pad
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;memory locations 'real_time_hours', 'real_time_minutes' and 'real_time_seconds'.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The routine uses default register names s0,s1,s2,s3,s4,s5. These are preserved in scratch pad
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;memory during the routine and restored before returning.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Useful constants for real time clock operations
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-count_1000_lsb
+   OPERAND2-E8
+    COMMENT-;lower 8-bits of 1000 count value
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-count_1000_msb
+   OPERAND2-03
+    COMMENT-;upper 8-bits of 1000 count value
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-hours_in_a_day
+   OPERAND2-18
+    COMMENT-;24 hours in a day
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-minutes_in_an_hour
+   OPERAND2-3C
+    COMMENT-;60 minutes in an hour
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-seconds_in_a_minute
+   OPERAND2-3C
+    COMMENT-;60 seconds in a minute
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-update_time
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-time_preserve0
+    COMMENT-;preserve contents of registers used during routine
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s1
+   OPERAND2-time_preserve1
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s2
+   OPERAND2-time_preserve2
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s3
+   OPERAND2-time_preserve3
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s4
+   OPERAND2-time_preserve4
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s5
+   OPERAND2-time_preserve5
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s2
+   OPERAND2-us_time_stamp_lsb
+    COMMENT-;read the previous 'us' time stamp into [s3,s2]
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s3
+   OPERAND2-us_time_stamp_msb
+    COMMENT-
+      LABEL-
+INSTRUCTION-DISABLE
+   OPERAND1-INTERRUPT
+   OPERAND2-
+    COMMENT-;Read and store current 'us' time stamp provided by the interrupt
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-int_counter_lsb
+   OPERAND2-us_time_stamp_lsb
+    COMMENT-;counter. Interrupts are disabled to ensure that both bytes relate
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-int_counter_msb
+   OPERAND2-us_time_stamp_msb
+    COMMENT-;to the same count value.
+      LABEL-
+INSTRUCTION-ENABLE
+   OPERAND1-INTERRUPT
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s4
+   OPERAND2-us_time_stamp_lsb
+    COMMENT-;read the new 'us' time stamp in [s5,s4]
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s5
+   OPERAND2-us_time_stamp_msb
+    COMMENT-;
+      LABEL-
+INSTRUCTION-SUB
+   OPERAND1-s4
+   OPERAND2-s2
+    COMMENT-;calculate 'us' time difference [s5,s4] = [s5,s4] - [s3,s2]
+      LABEL-
+INSTRUCTION-SUBCY
+   OPERAND1-s5
+   OPERAND2-s3
+    COMMENT-;   (This works correctly even if counter has rolled over)
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s2
+   OPERAND2-us_time_lsb
+    COMMENT-;read current 'us' time into [s3,s2]
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s3
+   OPERAND2-us_time_msb
+    COMMENT-
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+   OPERAND2-s4
+    COMMENT-;add on the elapsed 'us' value [s3,s2] = [s3,s2] + [s5,s4]
+      LABEL-
+INSTRUCTION-ADDCY
+   OPERAND1-s3
+   OPERAND2-s5
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;determine how many 1000us (1ms) units there are (if any) in current 'us' time
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s0
+   OPERAND2-00
+    COMMENT-;reset 'ms' counter
+      LABEL-test_1000us
+INSTRUCTION-SUB
+   OPERAND1-s2
+   OPERAND2-count_1000_lsb
+    COMMENT-;subtract 1000 from [s3,s2]
+      LABEL-
+INSTRUCTION-SUBCY
+   OPERAND1-s3
+   OPERAND2-count_1000_msb
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-C
+   OPERAND2-store_us_time
+    COMMENT-;Carry indicates [s3,s2] was less than 1000us
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s0
+   OPERAND2-01
+    COMMENT-;increment 'ms' elapsed because [s3,s2] was more or equal to 1000us
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-test_1000us
+   OPERAND2-
+    COMMENT-;repeat to see if more than 1ms has elapsed
+      LABEL-store_us_time
+INSTRUCTION-ADD
+   OPERAND1-s2
+   OPERAND2-count_1000_lsb
+    COMMENT-;add 1000 to restore 'us' value
+      LABEL-
+INSTRUCTION-ADDCY
+   OPERAND1-s3
+   OPERAND2-count_1000_msb
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s2
+   OPERAND2-us_time_lsb
+    COMMENT-;store the current value of 'us'
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s3
+   OPERAND2-us_time_msb
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;s0 holds the number of 'ms' elapsed since last update (if any).
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s2
+   OPERAND2-ms_time_lsb
+    COMMENT-;read current 'ms' time into [s3,s2]
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s3
+   OPERAND2-ms_time_msb
+    COMMENT-
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+   OPERAND2-s0
+    COMMENT-;add on the elapsed 'ms' value [s3,s2] = [s3,s2] + s0
+      LABEL-
+INSTRUCTION-ADDCY
+   OPERAND1-s3
+   OPERAND2-00
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;determine if there are now more than 1000ms to form 1 second.
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s0
+   OPERAND2-00
+    COMMENT-;reset 'second' counter
+      LABEL-
+INSTRUCTION-SUB
+   OPERAND1-s2
+   OPERAND2-count_1000_lsb
+    COMMENT-;subtract 1000 from [s3,s2]
+      LABEL-
+INSTRUCTION-SUBCY
+   OPERAND1-s3
+   OPERAND2-count_1000_msb
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-C
+   OPERAND2-restore_ms_time
+    COMMENT-;Carry indicates [s3,s2] was less than 1000ms
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s0
+   OPERAND2-01
+    COMMENT-;increment 'second' elapsed because [s3,s2] was more or equal to 1000ms
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-store_ms_time
+   OPERAND2-
+    COMMENT-;new value of 'ms' is remainder of subtraction
+      LABEL-restore_ms_time
+INSTRUCTION-ADD
+   OPERAND1-s2
+   OPERAND2-count_1000_lsb
+    COMMENT-;add 1000 to restore 'ms' value
+      LABEL-
+INSTRUCTION-ADDCY
+   OPERAND1-s3
+   OPERAND2-count_1000_msb
+    COMMENT-
+      LABEL-store_ms_time
+INSTRUCTION-STORE
+   OPERAND1-s2
+   OPERAND2-ms_time_lsb
+    COMMENT-;store the current value of 'ms'
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s3
+   OPERAND2-ms_time_msb
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;s0 currently determines if one second needs to be added to the hh:mm:ss clock time
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s1
+   OPERAND2-real_time_seconds
+    COMMENT-;read seconds
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s1
+   OPERAND2-s0
+    COMMENT-;add one second if required by s0
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s1
+   OPERAND2-seconds_in_a_minute
+    COMMENT-;test for 1 minute
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+   OPERAND2-inc_minutes
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s1
+   OPERAND2-real_time_seconds
+    COMMENT-;store updated seconds
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-time_update_complete
+   OPERAND2-
+    COMMENT-
+      LABEL-inc_minutes
+INSTRUCTION-LOAD
+   OPERAND1-s1
+   OPERAND2-00
+    COMMENT-;seconds become zero
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s1
+   OPERAND2-real_time_seconds
+    COMMENT-
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s1
+   OPERAND2-real_time_minutes
+    COMMENT-;read minutes
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s1
+   OPERAND2-01
+    COMMENT-;increment minutes
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s1
+   OPERAND2-minutes_in_an_hour
+    COMMENT-;test for 1 hour
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+   OPERAND2-inc_hours
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s1
+   OPERAND2-real_time_minutes
+    COMMENT-;store updated minutes
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-time_update_complete
+   OPERAND2-
+    COMMENT-
+      LABEL-inc_hours
+INSTRUCTION-LOAD
+   OPERAND1-s1
+   OPERAND2-00
+    COMMENT-;minutes become zero
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s1
+   OPERAND2-real_time_minutes
+    COMMENT-
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s1
+   OPERAND2-real_time_hours
+    COMMENT-;read hours
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s1
+   OPERAND2-01
+    COMMENT-;increment hours
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s1
+   OPERAND2-hours_in_a_day
+    COMMENT-;test for 24 hours
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+   OPERAND2-reset_hours
+    COMMENT-
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s1
+   OPERAND2-real_time_hours
+    COMMENT-;store updated hours
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-time_update_complete
+   OPERAND2-
+    COMMENT-
+      LABEL-reset_hours
+INSTRUCTION-LOAD
+   OPERAND1-s1
+   OPERAND2-00
+    COMMENT-;hours become zero
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s1
+   OPERAND2-real_time_hours
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;With the time updated, there is then a test for time=alarm time
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-time_update_complete
+INSTRUCTION-FETCH
+   OPERAND1-s0
+   OPERAND2-real_time_hours
+    COMMENT-
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s1
+   OPERAND2-alarm_time_hours
+    COMMENT-;compare hours
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-s1
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-finish_update
+    COMMENT-
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s0
+   OPERAND2-real_time_minutes
+    COMMENT-;compare minutes
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s1
+   OPERAND2-alarm_time_minutes
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-s1
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-finish_update
+    COMMENT-
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s0
+   OPERAND2-real_time_seconds
+    COMMENT-;compare seconds
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s1
+   OPERAND2-alarm_time_seconds
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-s1
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-NZ
+   OPERAND2-finish_update
+    COMMENT-
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s0
+   OPERAND2-alarm_status
+    COMMENT-;test if alarm is turned on
+      LABEL-
+INSTRUCTION-TEST
+   OPERAND1-s0
+   OPERAND2-alarm_armed
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-Z
+   OPERAND2-finish_update
+    COMMENT-;alarm was off
+      LABEL-
+INSTRUCTION-OR
+   OPERAND1-s0
+   OPERAND2-alarm_active
+    COMMENT-;activate alarm
+      LABEL-
+INSTRUCTION-STORE
+   OPERAND1-s0
+   OPERAND2-alarm_status
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-alarm_drive
+   OPERAND2-
+    COMMENT-
+      LABEL-finish_update
+INSTRUCTION-FETCH
+   OPERAND1-s0
+   OPERAND2-time_preserve0
+    COMMENT-;restore the register contents
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s1
+   OPERAND2-time_preserve1
+    COMMENT-
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s2
+   OPERAND2-time_preserve2
+    COMMENT-
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s3
+   OPERAND2-time_preserve3
+    COMMENT-
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s4
+   OPERAND2-time_preserve4
+    COMMENT-
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s5
+   OPERAND2-time_preserve5
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Convert character to upper case
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The character supplied in register s0.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;If the character is in the range 'a' to 'z', it is converted
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;to the equivalent upper case character in the range 'A' to 'Z'.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;All other characters remain unchanged.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Registers used s0.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-upper_case
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-61
+    COMMENT-;eliminate character codes below 'a' (61 hex)
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-C
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-COMPARE
+   OPERAND1-s0
+   OPERAND2-7B
+    COMMENT-;eliminate character codes above 'z' (7A hex)
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-NC
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-AND
+   OPERAND1-s0
+   OPERAND2-DF
+    COMMENT-;mask bit5 to convert to upper case
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Convert character '0' to '9' to numerical value in range 0 to 9
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The character supplied in register s0. If the character is in the
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;range '0' to '9', it is converted to the equivalent decimal value.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Characters not in the range '0' to '9' are signified by the return
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;with the CARRY flag set.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Registers used s0.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-1char_to_value
+INSTRUCTION-ADD
+   OPERAND1-s0
+   OPERAND2-C6
+    COMMENT-;reject character codes above '9' (39 hex)
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-C
+   OPERAND2-
+    COMMENT-;carry flag is set
+      LABEL-
+INSTRUCTION-SUB
+   OPERAND1-s0
+   OPERAND2-F6
+    COMMENT-;reject character codes below '0' (30 hex)
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;carry is set if value not in range
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Determine the numerical value of a two character decimal string held in
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;scratch pad memory such the result is in the range 0 to 99 (00 to 63 hex).
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The string must be stored as in two consecutive memory locations and the
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;location of the first (tens) character supplied in the s1 register.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The result is provided in register s2. Strings not using characters in the
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;range '0' to '9' are signified by the return with the CARRY flag set.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Registers used s0, s1 and s2.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-2char_to_value
+INSTRUCTION-FETCH
+   OPERAND1-s0
+   OPERAND2-(s1)
+    COMMENT-;read 'tens' character
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-1char_to_value
+   OPERAND2-
+    COMMENT-;convert to numerical value
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-C
+   OPERAND2-
+    COMMENT-;bad character - CARRY set
+      LABEL-
+INSTRUCTION-LOAD
+   OPERAND1-s2
+   OPERAND2-s0
+    COMMENT-
+      LABEL-
+INSTRUCTION-SL0
+   OPERAND1-s2
+   OPERAND2-
+    COMMENT-;multiply 'tens' value by 10 (0A hex)
+      LABEL-
+INSTRUCTION-SL0
+   OPERAND1-s2
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+   OPERAND2-s0
+    COMMENT-
+      LABEL-
+INSTRUCTION-SL0
+   OPERAND1-s2
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s1
+   OPERAND2-01
+    COMMENT-;read 'units' character
+      LABEL-
+INSTRUCTION-FETCH
+   OPERAND1-s0
+   OPERAND2-(s1)
+    COMMENT-
+      LABEL-
+INSTRUCTION-CALL
+   OPERAND1-1char_to_value
+   OPERAND2-
+    COMMENT-;convert to numerical value
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-C
+   OPERAND2-
+    COMMENT-;bad character - CARRY set
+      LABEL-
+INSTRUCTION-ADD
+   OPERAND1-s2
+   OPERAND2-s0
+    COMMENT-;add units to result and clear CARRY flag
+      LABEL-
+INSTRUCTION-RETURN
+   OPERAND1-
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Interrupt service routine (ISR)
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The interrupt is used to increment a 16-bit counter formed with two registers
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;called [int_counter_msb,int_counter_lsb]. This provides a count of the number
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;of micro-seconds elapsed. The counter is 'free running' in that it will count
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;up to 65,535 and then roll over to zero. The count value is then used in other
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;parts of the program as required and where it is less time critical.
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;The ISR only uses the specified counter registers
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-ADDRESS
+   OPERAND1-3FC
+   OPERAND2-
+    COMMENT-
+      LABEL-ISR
+INSTRUCTION-ADD
+   OPERAND1-int_counter_lsb
+   OPERAND2-01
+    COMMENT-;add 1us to 16-bit counter
+      LABEL-
+INSTRUCTION-ADDCY
+   OPERAND1-int_counter_msb
+   OPERAND2-00
+    COMMENT-
+      LABEL-
+INSTRUCTION-RETURNI
+   OPERAND1-ENABLE
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Interrupt vector
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-ADDRESS
+   OPERAND1-3FF
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-JUMP
+   OPERAND1-ISR
+   OPERAND2-
+    COMMENT-
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;Useful constants
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;ASCII table
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_a
+   OPERAND2-61
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_b
+   OPERAND2-62
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_c
+   OPERAND2-63
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_d
+   OPERAND2-64
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_e
+   OPERAND2-65
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_f
+   OPERAND2-66
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_g
+   OPERAND2-67
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_h
+   OPERAND2-68
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_i
+   OPERAND2-69
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_j
+   OPERAND2-6A
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_k
+   OPERAND2-6B
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_l
+   OPERAND2-6C
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_m
+   OPERAND2-6D
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_n
+   OPERAND2-6E
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_o
+   OPERAND2-6F
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_p
+   OPERAND2-70
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_q
+   OPERAND2-71
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_r
+   OPERAND2-72
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_s
+   OPERAND2-73
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_t
+   OPERAND2-74
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_u
+   OPERAND2-75
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_v
+   OPERAND2-76
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_w
+   OPERAND2-77
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_x
+   OPERAND2-78
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_y
+   OPERAND2-79
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_z
+   OPERAND2-7A
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_A
+   OPERAND2-41
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_B
+   OPERAND2-42
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_C
+   OPERAND2-43
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_D
+   OPERAND2-44
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_E
+   OPERAND2-45
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_F
+   OPERAND2-46
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_G
+   OPERAND2-47
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_H
+   OPERAND2-48
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_I
+   OPERAND2-49
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_J
+   OPERAND2-4A
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_K
+   OPERAND2-4B
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_L
+   OPERAND2-4C
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_M
+   OPERAND2-4D
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_N
+   OPERAND2-4E
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_O
+   OPERAND2-4F
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_P
+   OPERAND2-50
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_Q
+   OPERAND2-51
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_R
+   OPERAND2-52
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_S
+   OPERAND2-53
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_T
+   OPERAND2-54
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_U
+   OPERAND2-55
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_V
+   OPERAND2-56
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_W
+   OPERAND2-57
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_X
+   OPERAND2-58
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_Y
+   OPERAND2-59
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_Z
+   OPERAND2-5A
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_0
+   OPERAND2-30
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_1
+   OPERAND2-31
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_2
+   OPERAND2-32
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_3
+   OPERAND2-33
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_4
+   OPERAND2-34
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_5
+   OPERAND2-35
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_6
+   OPERAND2-36
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_7
+   OPERAND2-37
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_8
+   OPERAND2-38
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_9
+   OPERAND2-39
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_colon
+   OPERAND2-3A
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_semi_colon
+   OPERAND2-3B
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_less_than
+   OPERAND2-3C
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_greater_than
+   OPERAND2-3E
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_equals
+   OPERAND2-3D
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_space
+   OPERAND2-20
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_CR
+   OPERAND2-0D
+    COMMENT-;carriage return
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_question
+   OPERAND2-3F
+    COMMENT-;'?'
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_dollar
+   OPERAND2-24
+    COMMENT-
+      LABEL-
+INSTRUCTION-CONSTANT
+   OPERAND1-character_BS
+   OPERAND2-08
+    COMMENT-;Back Space command character
+      LABEL-
+INSTRUCTION-
+   OPERAND1-
+   OPERAND2-
+    COMMENT-;
