@@ -251,14 +251,14 @@ begin
 
   -- adding the output registers to the clock processor
    
-  output_ports: process(clk55MHz)
-  begin
-
-    if clk55MHz'event and clk55MHz='1' then
-      
-    end if; 
-
-  end process output_ports;
+--  output_ports: process(clk55MHz)
+--  begin
+--
+--    if clk55MHz'event and clk55MHz='1' then
+--		out_port <= 
+--    end if; 
+--
+--  end process output_ports;
 
   --
   -- write to UART transmitter FIFO buffer at address 01 hex.
