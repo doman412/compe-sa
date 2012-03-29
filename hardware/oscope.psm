@@ -1,103 +1,97 @@
-                        ;KCPSM3 Program - Real Time Clock with UART communication.
-                        ;
-                        ;Ken Chapman - Xilinx Ltd - October 2003
-                        ;
-                        ;
-                        ;Port definitions
-                        ;
-                        CONSTANT UART_status_port, 00            ;UART status input
-                        CONSTANT tx_half_full, 01                ;  Transmitter     half full - bit0
-                        CONSTANT tx_full, 02                     ;    FIFO               full - bit1
-                        CONSTANT rx_half_full, 04                ;  Receiver        half full - bit2
-                        CONSTANT rx_full, 08                     ;    FIFO               full - bit3
-                        CONSTANT rx_data_present, 10             ;               data present - bit4
-                        ;
-                        CONSTANT UART_read_port, 01              ;UART Rx data input
-                        ;
-                        CONSTANT UART_write_port, 01             ;UART Tx data output
-                        ;
-                        ;Special Register usage
-                        ;
-                        NAMEREG sF, UART_data                    ;used to pass data to and from the UART
-                        ;
-                        NAMEREG sE, store_pointer                ;used to pass location of data in scratch pad memory
-                        ;
-                        ;
-                        ;
-                        ;Scratch Pad Memory Locations
-                        ;
-                        ;
-                        ;UART character strings will be stored in scratch pad memory ending in carriage return.
-                        ;A string can be up to 16 characters with the start location defined by this constant.
-                        ;
-                        CONSTANT string_start, 20
-                        ;
-                        ;
-                        ;Initialise the system
-                        ;
-                        ;
-            cold_start: ; initialization
-                        ENABLE INTERRUPT                         ;enable the 1us interrupts
-			main_loop:	call read_from_UART
-						jump main_loop
-			
-			
-                        ;Read one character from the UART
-                        ;
-                        ;Character read will be returned in a register called 'UART_data' and will be
-                        ;echoed to the UART transmitter.
-                        ;
-                        ;The routine first tests the receiver FIFO buffer to see if data is present.
-                        ;If the FIFO is empty, the routine waits until there is a character to read.
-                        ;As this could take any amount of time the wait loop includes a call to the
-                        ;subroutine which updates the real time clock.
-                        ;
-                        ;Registers used s0 and UART_data
-                        ;
-        read_from_UART: INPUT s0, UART_status_port               ;test Rx_FIFO buffer
-                        TEST s0, rx_data_present
-                        JUMP NZ, read_character
-                        ;Perform useful operation whilst waiting
-                        JUMP read_from_UART
-        read_character: INPUT UART_data, UART_read_port          ;read from FIFO
-                        CALL send_to_UART                        ;echo received character
-                        RETURN
-                        ;
-                        ;
-                        ;
-                        ;Transmit one character to the UART
-                        ;
-                        ;Character supplied in register called 'UART_data'.
-                        ;
-                        ;The routine first tests the transmit FIFO buffer to see if it is full.
-                        ;If the FIFO is full, the routine waits until there is space which could
-                        ;be as long as it takes to transmit one complete character.
-                        ;
-                        ;    Baud Rate    Time per Character (10 bits)
-                        ;      9600           1,024us
-                        ;     19200             521us
-                        ;     38400             260us
-                        ;     57600             174us
-                        ;    115200              87us
-                        ;
-                        ;Since this is a relatively long duration, the wait loop includes a
-                        ;call to the subroutine which updates the real time clock.
-                        ;
-                        ;Registers used s0
-                        ;
-          send_to_UART: INPUT s0, UART_status_port               ;test Tx_FIFO buffer
-                        TEST s0, tx_full
-                        JUMP Z, UART_write
-                        ;Perform useful operation whilst waiting
-                        JUMP send_to_UART
-            UART_write: OUTPUT UART_data, UART_write_port
-                        RETURN
-                       
-					   
-                        ADDRESS 3FC
-                   ISR:  RETURNI ENABLE ; TODO implement
-                        ;
-                        ;Interrupt vector
-                        ;
-                        ADDRESS 3FF
-                        JUMP ISR
+; KCPSM3 Program - Signal Analyzer/Generator
+; Tom Hays - Clarkson University - March 2012
+; Modified from "UART real time clock" code by:
+; Ken Chapman - Xilinx Ltd - October 2003
+; 
+; Output directive
+VHDL "ROM_form.vhd", "oscope.vhd", "oscope"
+; 
+; Port definitions
+; 
+UART_status_port    EQU       0                   ; UART status input
+tx_half_full        EQU       1                   ; Transmitter     half full - bit0
+tx_full             EQU       2                   ; FIFO               full - bit1
+rx_half_full        EQU       4                   ; Receiver        half full - bit2
+rx_full             EQU       8                   ; FIFO               full - bit3
+rx_data_present     EQU       16                  ; data present - bit4
+; 
+UART_read_port      EQU       1                   ; UART Rx data input
+; 
+UART_write_port     EQU       1                   ; UART Tx data output
+; 
+; Special Register usage
+; 
+UART_data           EQU       sF                  ; used to pass data to and from the UART
+; 
+store_pointer       EQU       sE                  ; used to pass location of data in scratch pad memory
+; 
+; 
+; 
+; Scratch Pad Memory Locations
+; 
+
+; 
+; Initialise the system
+; 
+; 
+cold_start:                                       ; initialization
+                    EINT                          ; enable the interrupts
+main_loop:          CALL      read_from_UART
+                    JUMP      main_loop
+
+
+; Read one character from the UART
+; 
+; Character read will be returned in a register called 'UART_data' and will be
+; echoed to the UART transmitter.
+; 
+; The routine first tests the receiver FIFO buffer to see if data is present.
+; If the FIFO is empty, the routine waits until there is a character to read.
+ 
+; Registers used s0 and UART_data
+; 
+read_from_UART:     IN        s0, UART_status_port; test Rx_FIFO buffer
+                    TEST      s0, rx_data_present
+                    JUMP      NZ, read_character
+; Perform useful operation whilst waiting
+                    JUMP      read_from_UART
+read_character:     IN        UART_data, UART_read_port; read from FIFO
+                    CALL      send_to_UART        ; echo received character
+                    RET       
+; 
+; 
+; 
+; Transmit one character to the UART
+; 
+; Character supplied in register called 'UART_data'.
+; 
+; The routine first tests the transmit FIFO buffer to see if it is full.
+; If the FIFO is full, the routine waits until there is space which could
+; be as long as it takes to transmit one complete character.
+; 
+; Baud Rate    Time per Character (10 bits)
+; 9600           1,024us
+; 19200             521us
+; 38400             260us
+; 57600             174us
+; 115200              87us
+; 
+; 
+; Registers used s0
+; 
+send_to_UART:       IN        s0, UART_status_port; test Tx_FIFO buffer
+                    TEST      s0, tx_full
+                    JUMP      Z, UART_write
+; Perform useful operation whilst waiting
+                    JUMP      send_to_UART
+UART_write:         OUT       UART_data, UART_write_port
+                    RET       
+
+
+                    ORG       $3FC
+ISR:                RETI      ENABLE              ; TODO implement
+; 
+; Interrupt vector
+; 
+                    ORG       $3FF
+					JUMP      ISR
