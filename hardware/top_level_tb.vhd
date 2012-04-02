@@ -50,7 +50,7 @@ ARCHITECTURE behavior OF top_level_tb IS
     
 
    --Inputs
-   signal rx : std_logic := '0';
+   signal rx : std_logic := '1';
    signal clk : std_logic := '0';
 
  	--Outputs
