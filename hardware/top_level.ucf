@@ -5,8 +5,11 @@ NET "clk" LOC = L15;
 NET "rx" LOC = B16;
 NET "tx" LOC = A16;
 
-# PlanAhead Generated IO constraints 
-
-NET "clk" IOSTANDARD = LVCMOS33;
-NET "rx" IOSTANDARD = LVCMOS33;
-NET "tx" IOSTANDARD = LVCMOS33;
+NET "led<7>" LOC = N12;
+NET "led<6>" LOC = P16;
+NET "led<5>" LOC = D4;
+NET "led<4>" LOC = M13;
+NET "led<3>" LOC = L14;
+NET "led<2>" LOC = N14;
+NET "led<1>" LOC = M14;
+NET "led<0>" LOC = U18;

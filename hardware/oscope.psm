@@ -18,6 +18,8 @@ rx_data_present     EQU       16                  ; data present - bit4
 UART_read_port      EQU       1                   ; UART Rx data input
 ; 
 UART_write_port     EQU       1                   ; UART Tx data output
+;
+LED_port			EQU		  2					  ; LED port
 ; 
 ; Special Register usage
 ; 
@@ -36,6 +38,8 @@ store_pointer       EQU       sE                  ; used to pass location of dat
 ; 
 cold_start:                                       ; initialization
                     EINT                          ; enable the interrupts
+					LOAD	  UART_data, 41
+					CALL	  send_to_UART
 main_loop:          CALL      read_from_UART
                     JUMP      main_loop
 
@@ -56,6 +60,7 @@ read_from_UART:     IN        s0, UART_status_port; test Rx_FIFO buffer
 ; Perform useful operation whilst waiting
                     JUMP      read_from_UART
 read_character:     IN        UART_data, UART_read_port; read from FIFO
+					OUT		  UART_data, LED_port
                     CALL      send_to_UART        ; echo received character
                     RET       
 ; 

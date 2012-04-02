@@ -48,7 +48,8 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 entity top_level is
     Port (    tx : out std_logic;
               rx : in std_logic;
-             clk : in std_logic);
+             clk : in std_logic;
+				 led : out std_logic_vector(7 downto 0));
     end top_level;
 --
 ------------------------------------------------------------------------------------
@@ -161,6 +162,8 @@ signal clk55MHz : std_logic;
 signal locked : std_logic;
 signal reset : std_logic;
 
+signal led_internal : std_logic_vector(7 downto 0) := (others => '0');
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --
 -- Start of circuit description
@@ -249,22 +252,29 @@ begin
   ----------------------------------------------------------------------------------------------------------------------------------
   --
 
-  -- adding the output registers to the clock processor
-   
---  output_ports: process(clk55MHz)
---  begin
---
---    if clk55MHz'event and clk55MHz='1' then
---		out_port <= 
---    end if; 
---
---  end process output_ports;
+--  -- adding the output registers to the clock processor
+--   
+  output_ports: process(clk55MHz)
+  begin
+
+    if clk55MHz'event and clk55MHz='1' then
+		if write_strobe = '1' then
+			case port_id(1 downto 0) is
+				when "10" =>
+					led_internal <= out_port;
+				when others =>
+					-- Do nothing
+			end case;
+		end if;
+    end if; 
+
+  end process output_ports;
 
   --
   -- write to UART transmitter FIFO buffer at address 01 hex.
   -- This is a combinatorial decode because the FIFO is the 'port register'.
   --
-
+	
   write_to_uart <= write_strobe and port_id(0);
   
   
@@ -272,6 +282,9 @@ begin
   -- No interrupt yet
   --
   interrupt <= '0';
+  
+  -- Map signal to out
+  led <= led_internal;
   
 
   --
