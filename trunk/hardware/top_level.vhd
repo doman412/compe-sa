@@ -155,6 +155,8 @@ signal             rx_data : std_logic_vector(7 downto 0);
 signal     rx_data_present : std_logic;
 signal             rx_full : std_logic;
 signal        rx_half_full : std_logic;
+
+signal		uart_reset		: std_logic := '0';
 --
 -- Signals for DCM
 
@@ -220,6 +222,9 @@ begin
   input_ports: process(clk55MHz)
   begin
     if clk55MHz'event and clk55MHz='1' then
+	 
+		-- Defaults
+		read_from_uart <= '0';
 
       case port_id(0) is
 
@@ -228,7 +233,9 @@ begin
         when '0' =>    in_port <= uart_status_port;
 
         -- read UART receive data at address 01 hex
-        when '1' =>    in_port <= rx_data;
+        when '1' =>    
+			in_port <= rx_data;
+			read_from_uart <= '1';
         
         -- Don't care used for all other addresses to ensure minimum logic implementation
         when others =>    in_port <= "XXXXXXXX";  
@@ -258,8 +265,17 @@ begin
   begin
 
     if clk55MHz'event and clk55MHz='1' then
+		--Defaults
+		write_to_uart <= '0';
+		
 		if write_strobe = '1' then
 			case port_id(1 downto 0) is
+				when "00" =>
+					uart_reset <= out_port(0);
+				when "01" =>
+					-- out_port is already wired to uart_tx, just need to strobe
+					-- write_to_uart signal
+					write_to_uart <= '1';
 				when "10" =>
 					led_internal <= out_port;
 				when others =>
@@ -275,7 +291,7 @@ begin
   -- This is a combinatorial decode because the FIFO is the 'port register'.
   --
 	
-  write_to_uart <= write_strobe and port_id(0);
+  -- write_to_uart <= write_strobe and port_id(0);
   
   
   --
@@ -299,7 +315,7 @@ begin
   transmit: uart_tx 
   port map (            data_in => out_port, 
                    write_buffer => write_to_uart,
-                   reset_buffer => '0',
+                   reset_buffer => uart_reset,
                    en_16_x_baud => en_16_x_baud,
                      serial_out => tx,
                     buffer_full => tx_full,
@@ -310,7 +326,7 @@ begin
   port map (            serial_in => rx,
                          data_out => rx_data,
                       read_buffer => read_from_uart,
-                     reset_buffer => '0',
+                     reset_buffer => uart_reset,
                      en_16_x_baud => en_16_x_baud,
               buffer_data_present => rx_data_present,
                       buffer_full => rx_full,
