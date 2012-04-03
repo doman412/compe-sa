@@ -38,6 +38,8 @@ store_pointer       EQU       sE                  ; used to pass location of dat
 ; 
 cold_start:                                       ; initialization
                     EINT                          ; enable the interrupts
+					LOAD	  s0, 05
+					OUT		  s0, LED_port
 					LOAD	  UART_data, 41
 					CALL	  send_to_UART
 main_loop:          CALL      read_from_UART

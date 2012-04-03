@@ -160,7 +160,7 @@ signal        rx_half_full : std_logic;
 
 signal clk55MHz : std_logic;
 signal locked : std_logic;
-signal reset : std_logic;
+signal reset : std_logic := '0';
 
 signal led_internal : std_logic_vector(7 downto 0) := (others => '0');
 
