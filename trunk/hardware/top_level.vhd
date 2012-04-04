@@ -391,18 +391,18 @@ begin
                               clk => clk55MHz );  
 										
 										
---	my_adc: adc_controller
---    Port map ( clk => clk500KHz,
---           start_capture => adc_start_capture,
---           
---			  
---           adc_address_latch_enable => adc_address_latch_enable,
---           adc_output_enable => adc_output_enable,
---           adc_start => adc_start,
---           adc_end_of_conversion => adc_end_of_conversion,
---			
---			  new_data => adc_new_data,
---			  data_ack => adc_data_ack);
+	my_adc: adc_controller
+    Port map ( clk => clk500KHz,
+           start_capture => adc_start_capture,
+           
+			  
+           adc_address_latch_enable => adc_address_latch_enable,
+           adc_output_enable => adc_output_enable,
+           adc_start => adc_start,
+           adc_end_of_conversion => adc_end_of_conversion,
+			
+			  new_data => adc_new_data,
+			  data_ack => adc_data_ack);
   
  --
   -- Set baud rate to 38400 for the UART communications
