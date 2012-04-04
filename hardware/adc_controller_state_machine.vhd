@@ -46,9 +46,9 @@ architecture Behavioral of adc_controller_state_machine is
 	signal current_state, next_state : state_type := idle;
 	
 	-- Data Registers
-	signal adc_start_current, adc_start_next : std_logic;
-	signal adc_address_latch_enable_current, adc_address_latch_enable_next : std_logic;
-	signal adc_output_enable_current, adc_output_enable_next : std_logic;
+	signal adc_start_current, adc_start_next : std_logic := '0';
+	signal adc_address_latch_enable_current, adc_address_latch_enable_next : std_logic := '0';
+	signal adc_output_enable_current, adc_output_enable_next : std_logic := '0';
 
 begin
 
