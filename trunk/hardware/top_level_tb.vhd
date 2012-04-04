@@ -39,25 +39,31 @@ ARCHITECTURE behavior OF top_level_tb IS
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT top_level
-    PORT(
-         tx : OUT  std_logic;
-         rx : IN  std_logic;
-         clk : IN  std_logic;
-         led : OUT  std_logic_vector(7 downto 0);
-			adc_clk : out std_logic
-        );
-    END COMPONENT;
+   component top_level is
+    Port (    tx : out std_logic;
+              rx : in std_logic;
+             clk : in std_logic;
+				 led : out std_logic_vector(7 downto 0);
+				 adc_clk : out std_logic;
+				 adc_start : out std_logic;
+				 adc_address_latch_enable : out std_logic;
+				 adc_output_enable : out std_logic;
+				 adc_end_of_conversion : in std_logic);
+    end component;
     
 
    --Inputs
    signal rx : std_logic := '1';
    signal clk : std_logic := '0';
+	signal adc_end_of_conversion : std_logic := '0';
 
  	--Outputs
    signal tx : std_logic;
    signal led : std_logic_vector(7 downto 0);
 	signal adc_clk : std_logic;
+	signal adc_start : std_logic;
+	signal adc_address_latch_enable : std_logic;
+	signal adc_output_enable : std_logic;
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
@@ -70,7 +76,11 @@ BEGIN
           rx => rx,
           clk => clk,
           led => led,
-			 adc_clk => adc_clk
+			 adc_clk => adc_clk,
+			 adc_start => adc_start,
+			 adc_address_latch_enable => adc_address_latch_enable,
+			 adc_output_enable => adc_output_enable,
+			 adc_end_of_conversion => adc_end_of_conversion
         );
 
    -- Clock process definitions

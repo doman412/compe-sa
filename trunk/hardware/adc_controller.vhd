@@ -32,14 +32,12 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity adc_controller is
     Port ( clk : in  STD_LOGIC;
            start_capture : in  STD_LOGIC;
-           interrupt : out  STD_LOGIC;
-           data : out  STD_LOGIC_VECTOR (7 downto 0);
-			  
+           
            adc_address_latch_enable : out  STD_LOGIC;
            adc_output_enable : out  STD_LOGIC;
            adc_start : out  STD_LOGIC;
            adc_end_of_conversion : in  STD_LOGIC;
-			--  adc_clk : out std_logic;
+			 
 			  new_data : out std_logic;
 			  data_ack : in std_logic);
 end adc_controller;
@@ -79,28 +77,7 @@ architecture Behavioral of adc_controller is
 
 
 begin
---
---	-- Generate a clk_count for the slow clock
---	process(clk)
---	begin
---		if clk'event and clk = '1' then
---			if clk_count = 110 then
---				clk_count <= 0;
---			else
---				clk_count <= clk_count + 1;
---			end if;
---		end if;
---	end process;
---	
---	-- Use the clk_count to generate the 500 KHz clock
---	process(clk_count)
---	begin
---		if clk_count < 55 then
---			adc_clk_signal <= '0';
---		else
---			adc_clk_signal <= '1';
---		end if;
---	end process;
+
 	
 	-- Convert the start_capture signal to the slow domain
 	converter1: fast_to_slow_domain_converter port map (
@@ -127,8 +104,6 @@ begin
 		 data_ack => data_ack_slow_domain,
 		 new_data => new_data);
 	
-
-	--adc_clk <= adc_clk_signal;
 
 end Behavioral;
 

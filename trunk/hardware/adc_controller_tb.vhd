@@ -38,37 +38,34 @@ END adc_controller_tb;
 ARCHITECTURE behavior OF adc_controller_tb IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
- 
-    COMPONENT adc_controller
-    PORT(
-         clk : IN  std_logic;
-         start_capture : IN  std_logic;
-         interrupt : OUT  std_logic;
-         data : OUT  std_logic_vector(7 downto 0);
-         adc_address_latch_enable : OUT  std_logic;
-         adc_output_enable : OUT  std_logic;
-         adc_start : IN  std_logic;
-         adc_end_of_conversion : IN  std_logic;
-         adc_clk : OUT  std_logic
-        );
-    END COMPONENT;
+ component adc_controller is
+    Port ( clk : in  STD_LOGIC;
+           start_capture : in  STD_LOGIC;
+           
+           adc_address_latch_enable : out  STD_LOGIC;
+           adc_output_enable : out  STD_LOGIC;
+           adc_start : out  STD_LOGIC;
+           adc_end_of_conversion : in  STD_LOGIC;
+			 
+			  new_data : out std_logic;
+			  data_ack : in std_logic);
+end component;
     
 
    --Inputs
    signal clk : std_logic := '0';
    signal start_capture : std_logic := '0';
-   signal adc_start : std_logic := '0';
    signal adc_end_of_conversion : std_logic := '0';
+	signal data_ack : std_logic := '0';
 
  	--Outputs
-   signal interrupt : std_logic;
-   signal data : std_logic_vector(7 downto 0);
-   signal adc_address_latch_enable : std_logic;
+	signal adc_address_latch_enable : std_logic;
    signal adc_output_enable : std_logic;
-   signal adc_clk : std_logic;
+	signal adc_start : std_logic;
+	signal new_data : std_logic;
 
    -- Clock period definitions
-   constant clk_period : time := 18 ns;
+   constant clk_period : time := 2 ms;
  
 BEGIN
  
@@ -76,13 +73,12 @@ BEGIN
    uut: adc_controller PORT MAP (
           clk => clk,
           start_capture => start_capture,
-          interrupt => interrupt,
-          data => data,
-          adc_address_latch_enable => adc_address_latch_enable,
+           adc_address_latch_enable => adc_address_latch_enable,
           adc_output_enable => adc_output_enable,
           adc_start => adc_start,
           adc_end_of_conversion => adc_end_of_conversion,
-          adc_clk => adc_clk
+				data_ack => data_ack,
+				new_data => new_data
         );
 
    -- Clock process definitions
