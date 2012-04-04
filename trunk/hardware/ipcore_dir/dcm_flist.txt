@@ -1,8 +1,8 @@
 # Output products list for <dcm>
+_xmsgs\pn_parser.xmsgs
 dcm.asy
 dcm.ejp
 dcm.gise
-dcm.sym
 dcm.vhd
 dcm.vho
 dcm.xco

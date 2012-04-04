@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   18:38:55 04/02/2012
+-- Create Date:   19:25:59 04/03/2012
 -- Design Name:   
--- Module Name:   C:/Users/Tom/Desktop/compe-sa/hardware/top_level_tb.vhd
+-- Module Name:   C:/Users/Tom/Desktop/compe-sa/hardware/fast_to_slow_domain_converter_tb.vhd
 -- Project Name:  oscilloscope
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: top_level
+-- VHDL Test Bench Created by ISE for module: fast_to_slow_domain_converter
 -- 
 -- Dependencies:
 -- 
@@ -32,55 +32,59 @@ USE ieee.std_logic_1164.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY top_level_tb IS
-END top_level_tb;
+ENTITY fast_to_slow_domain_converter_tb IS
+END fast_to_slow_domain_converter_tb;
  
-ARCHITECTURE behavior OF top_level_tb IS 
+ARCHITECTURE behavior OF fast_to_slow_domain_converter_tb IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT top_level
+    COMPONENT fast_to_slow_domain_converter
     PORT(
-         tx : OUT  std_logic;
-         rx : IN  std_logic;
-         clk : IN  std_logic;
-         led : OUT  std_logic_vector(7 downto 0);
-			adc_clk : out std_logic
+         fast_signal : IN  std_logic;
+         target_domain_clk : IN  std_logic;
+         slow_signal : OUT  std_logic
         );
     END COMPONENT;
     
 
    --Inputs
-   signal rx : std_logic := '1';
-   signal clk : std_logic := '0';
+   signal fast_signal : std_logic := '0';
+   signal target_domain_clk : std_logic := '0';
+	signal fast_clk : std_logic := '0';
 
  	--Outputs
-   signal tx : std_logic;
-   signal led : std_logic_vector(7 downto 0);
-	signal adc_clk : std_logic;
+   signal slow_signal : std_logic;
 
    -- Clock period definitions
-   constant clk_period : time := 10 ns;
+	constant fast_clk_period : time := 10 ns;
+   constant target_domain_clk_period : time := 100 ns;
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: top_level PORT MAP (
-          tx => tx,
-          rx => rx,
-          clk => clk,
-          led => led,
-			 adc_clk => adc_clk
+   uut: fast_to_slow_domain_converter PORT MAP (
+          fast_signal => fast_signal,
+          target_domain_clk => target_domain_clk,
+          slow_signal => slow_signal
         );
 
    -- Clock process definitions
-   clk_process :process
+   target_domain_clk_process :process
    begin
-		clk <= '0';
-		wait for clk_period/2;
-		clk <= '1';
-		wait for clk_period/2;
+		target_domain_clk <= '0';
+		wait for target_domain_clk_period/2;
+		target_domain_clk <= '1';
+		wait for target_domain_clk_period/2;
    end process;
+	
+	process
+	begin
+		fast_clk <= '0';
+		wait for fast_clk_period/2;
+		fast_clk <= '1';
+		wait for fast_clk_period/2;
+	end process;
  
 
    -- Stimulus process
@@ -88,10 +92,9 @@ BEGIN
    begin		
       -- hold reset state for 100 ns.
       wait for 100 ns;	
-
-      wait for clk_period*10;
-
-      -- insert stimulus here 
+		fast_signal <= '1';
+		wait for fast_clk_period;
+		fast_signal <= '0';
 
       wait;
    end process;

@@ -49,7 +49,8 @@ entity top_level is
     Port (    tx : out std_logic;
               rx : in std_logic;
              clk : in std_logic;
-				 led : out std_logic_vector(7 downto 0));
+				 led : out std_logic_vector(7 downto 0);
+				 adc_clk : out std_logic);
     end top_level;
 --
 ------------------------------------------------------------------------------------
@@ -119,6 +120,7 @@ port
   CLK_IN1           : in     std_logic;
   -- Clock out ports
   CLK_OUT1          : out    std_logic;
+  CLK_OUT2			  : out	  std_logic;
   -- Status and control signals
   RESET             : in     std_logic;
   LOCKED            : out    std_logic
@@ -161,6 +163,9 @@ signal		uart_reset		: std_logic := '0';
 -- Signals for DCM
 
 signal clk55MHz : std_logic;
+signal clk5MHz : std_logic;
+signal clk500KHz : std_logic;
+signal clk_count : natural range 0 to 9;
 signal locked : std_logic;
 signal reset : std_logic := '0';
 
@@ -201,9 +206,31 @@ begin
     CLK_IN1 => clk,
     -- Clock out ports
     CLK_OUT1 => clk55MHz,
+	 CLK_OUT2 => clk5MHz,
     -- Status and control signals
     RESET  => RESET,
     LOCKED => LOCKED);
+	 
+	 process(clk5MHz)
+	 begin
+		if rising_edge(clk5MHz) then
+			if clk_count = 9 then
+				clk_count <= 0;
+			else
+				clk_count <= clk_count + 1;
+			end if;
+		end if;
+	 end process;
+	 
+	 process(clk_count)
+	 begin
+		if clk_count < 5 then
+			clk500KHz <= '0';
+		else
+			clk500KHz <= '1';
+		end if;
+	 end process;
+	 
   --
   ----------------------------------------------------------------------------------------------------------------------------------
   -- KCPSM3 input ports 
@@ -353,5 +380,7 @@ begin
       end if;
     end if;
   end process baud_timer;
-
+  
+  adc_clk <= clk500KHz;
+  reset <= '0';
 end Behavioral;
