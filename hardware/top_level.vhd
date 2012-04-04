@@ -50,7 +50,11 @@ entity top_level is
               rx : in std_logic;
              clk : in std_logic;
 				 led : out std_logic_vector(7 downto 0);
-				 adc_clk : out std_logic);
+				 adc_clk : out std_logic;
+				 adc_start : out std_logic;
+				 adc_address_latch_enable : out std_logic;
+				 adc_output_enable : out std_logic;
+				 adc_end_of_conversion : in std_logic);
     end top_level;
 --
 ------------------------------------------------------------------------------------
@@ -126,6 +130,20 @@ port
   LOCKED            : out    std_logic
  );
 end component;
+
+
+component adc_controller is
+    Port ( clk : in  STD_LOGIC;
+           start_capture : in  STD_LOGIC;
+           
+           adc_address_latch_enable : out  STD_LOGIC;
+           adc_output_enable : out  STD_LOGIC;
+           adc_start : out  STD_LOGIC;
+           adc_end_of_conversion : in  STD_LOGIC;
+			
+			  new_data : out std_logic;
+			  data_ack : in std_logic);
+end component;
 ------------------------------------------------------------------------------------
 --
 -- Signals used to connect KCPSM3 to program ROM and I/O logic
@@ -169,7 +187,17 @@ signal clk_count : natural range 0 to 9;
 signal locked : std_logic;
 signal reset : std_logic := '0';
 
+--
+-- Signals for LED
+--
 signal led_internal : std_logic_vector(7 downto 0) := (others => '0');
+
+--
+-- Signals for ADC
+--
+signal adc_data_ack : std_logic := '0';
+signal adc_new_data : std_logic;
+signal adc_start_capture : std_logic := '0';
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --
@@ -290,15 +318,17 @@ begin
 --   
   output_ports: process(clk55MHz)
   begin
+  
+	
 
-    if clk55MHz'event and clk55MHz='1' then
+    if rising_edge(clk55MHz) then
 		--Defaults
 		write_to_uart <= '0';
-		
+		uart_reset <= '0';
 		if write_strobe = '1' then
 			case port_id(1 downto 0) is
 				when "00" =>
-					uart_reset <= out_port(0);
+					uart_reset <= '1';
 				when "01" =>
 					-- out_port is already wired to uart_tx, just need to strobe
 					-- write_to_uart signal
@@ -359,6 +389,20 @@ begin
                       buffer_full => rx_full,
                  buffer_half_full => rx_half_full,
                               clk => clk55MHz );  
+										
+										
+--	my_adc: adc_controller
+--    Port map ( clk => clk500KHz,
+--           start_capture => adc_start_capture,
+--           
+--			  
+--           adc_address_latch_enable => adc_address_latch_enable,
+--           adc_output_enable => adc_output_enable,
+--           adc_start => adc_start,
+--           adc_end_of_conversion => adc_end_of_conversion,
+--			
+--			  new_data => adc_new_data,
+--			  data_ack => adc_data_ack);
   
  --
   -- Set baud rate to 38400 for the UART communications
