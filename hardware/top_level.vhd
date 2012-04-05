@@ -55,7 +55,7 @@ entity top_level is
 				 adc_address_latch_enable : out std_logic;
 				 adc_output_enable : out std_logic;
 				 adc_end_of_conversion : in std_logic;
-				 adc_data : in std_logic);
+				 adc_data : in std_logic_vector(7 downto 0));
     end top_level;
 --
 ------------------------------------------------------------------------------------
@@ -288,6 +288,9 @@ begin
         -- read UART receive data at address 01 hex
         when "01" =>    
 			in_port <= rx_data;
+			
+			when "10" =>
+				in_port <= adc_data;
         
         -- Don't care used for all other addresses to ensure minimum logic implementation
         when others =>    in_port <= "XXXXXXXX";  
@@ -298,7 +301,19 @@ begin
       -- The fact that the read strobe will occur after the actual data is read by 
       -- the KCPSM3 is acceptable because it is really means 'I have read you'!
 
-      read_from_uart <= read_strobe and port_id(0); 
+     if port_id(1 downto 0) = "01" and read_strobe = '1' then
+		read_from_uart <= '1';
+	  else
+		read_from_uart <= '0';
+	  end if;
+	  
+	  -- Form data acknowledge for ADC
+	  
+	  if port_id(1 downto 0) = "10" and read_strobe = '1' then
+		adc_data_ack <= '1';
+	  else
+		adc_data_ack <= '0';
+	  end if;
 
     end if;
 
