@@ -44,6 +44,7 @@ UART_data           EQU       sF                  ; used to pass data to and fro
 store_pointer       EQU       sE                  ; used to pass location of data in scratch pad memory
 
 ADC_data			EQU		  sD				  ; used for UART data
+num_samples			EQU		  sC
 ; 
 ; 
 ; 
@@ -56,9 +57,16 @@ ADC_data			EQU		  sD				  ; used for UART data
 ; 
 cold_start:                                       ; initialization
                    	OUT	 s0, UART_reset_port	  ; doesn't matter what we write
-main_loop:			CALL read_and_send_one
-					JUMP main_loop
+                   	LOAD num_samples, $03
+main_loop:			CALL read_and_send_n
+here:				JUMP here
 
+read_and_send_n:	COMP num_samples, $00
+					JUMP NZ, collect
+					RET
+collect:			call read_and_send_one
+					sub num_samples, $01
+					jump read_and_send_n
 
 
 read_and_send_one: 	CALL ADC_read
