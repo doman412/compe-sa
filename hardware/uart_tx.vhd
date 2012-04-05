@@ -104,7 +104,7 @@ entity uart_tx is
                  reset_buffer : in std_logic;
                  en_16_x_baud : in std_logic;
                    serial_out : out std_logic;
-						 buffer_has_data: out std_logic;
+						 done_sending: out std_logic;
                   buffer_full : out std_logic;
              buffer_half_full : out std_logic;
                           clk : in std_logic);
@@ -156,6 +156,11 @@ component bbfifo_16x8
 signal fifo_data_out      : std_logic_vector(7 downto 0);
 signal fifo_data_present  : std_logic;
 signal fifo_read          : std_logic;
+
+
+type state_type is (not_sending_yet, sending, data_sent);
+signal c_s, n_s : state_type := not_sending_yet;
+
 --
 -------------------------------------------------------------------------------------------
 --
@@ -185,8 +190,42 @@ begin
                        clk => clk);
 							  
 							  
-	buffer_has_data <= fifo_data_present;
-
+	process(clk)
+	begin
+		if rising_edge(clk) then
+			c_s <= n_s;
+		end if;
+	end process;
+	
+	process(c_s, fifo_data_present)
+	begin
+		case c_s is
+			when not_sending_yet =>
+				if fifo_data_present = '0' then
+					n_s <= not_sending_yet;
+				else
+					n_s <= sending;
+				end if;
+			when sending =>
+				if fifo_data_present = '0' then
+					n_s <= data_sent;
+				else
+					n_s <= sending;
+				end if;
+			when data_sent =>
+				if fifo_data_present = '0' then
+					n_s <= data_sent;
+				else
+					n_s <= sending;
+				end if;
+			when others =>
+				n_s <= not_sending_yet;
+		end case;
+	end process;
+	
+	
+	done_sending <= '1' when c_s = data_sent else '0';
+	
 end macro_level_definition;
 
 

@@ -56,7 +56,7 @@ ARCHITECTURE behavior OF top_level_tb IS
    --Inputs
    signal rx : std_logic := '1';
    signal clk : std_logic := '0';
-	signal adc_end_of_conversion : std_logic := '0';
+	signal adc_end_of_conversion : std_logic := '1';
 	signal adc_data : std_logic_vector(7 downto 0);
 
  	--Outputs
@@ -105,13 +105,16 @@ BEGIN
       wait until adc_start = '1';
 		wait until adc_start = '0';
 		wait for 2*adc_clk_period;
+		adc_end_of_conversion <= '0';
+		wait for 2*adc_clk_period;
 		adc_end_of_conversion <= '1';
 		wait for 200 us;
 		adc_data <= x"41";
 		wait until adc_address_latch_enable <= '1';
-		adc_end_of_conversion <= '0';
 		wait until adc_start = '1';
 		wait until adc_start = '0';
+		wait for 2*adc_clk_period;
+		adc_end_of_conversion <= '0';
 		wait for 2*adc_clk_period;
 		adc_end_of_conversion <= '1';
 		

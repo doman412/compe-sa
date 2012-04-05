@@ -14,7 +14,7 @@ tx_full             EQU       2                   ; FIFO               full - bi
 rx_half_full        EQU       4                   ; Receiver        half full - bit2
 rx_full             EQU       8                   ; FIFO               full - bit3
 rx_data_present     EQU       16                  ; data present - bit4
-tx_data_present		EQU		  32				  ; tx_data_present - bit 5
+done_sending		EQU		  32				  ; done_sending - bit 5
 ; 
 UART_reset_port		EQU		  0
 UART_read_port      EQU       1                   ; UART Rx data input
@@ -42,6 +42,8 @@ ADC_new_data		EQU		  1
 UART_data           EQU       sF                  ; used to pass data to and from the UART
 ; 
 store_pointer       EQU       sE                  ; used to pass location of data in scratch pad memory
+
+ADC_data			EQU		  sD				  ; used for UART data
 ; 
 ; 
 ; 
@@ -55,18 +57,38 @@ store_pointer       EQU       sE                  ; used to pass location of dat
 cold_start:                                       ; initialization
                     EINT                          ; enable the interrupts
 					OUT	 s0, UART_reset_port	  ; doesn't matter what we write
-do_adc_reading:		OUT	 s0, ADC_start_port		  ; doesn't matter here either
-poll_adc_status:	IN	 s0, ADC_status_port
+main_loop:			CALL ADC_read
+					LOAD UART_data, ADC_data
+					CALL send_to_UART_sync
+					JUMP main_loop
+;do_adc_reading:		OUT	 s0, ADC_start_port		  ; doesn't matter here either
+;poll_adc_status:	IN	 s0, ADC_status_port
+;					TEST s0, ADC_new_data
+;					JUMP NZ, read_ADC_data
+;					JUMP poll_adc_status
+;read_ADC_data:		IN	 UART_data, ADC_data_port
+;					CALL send_to_UART
+;poll_uart_status:	IN s0, UART_status_port
+;					TEST s0, tx_data_present
+;					JUMP NZ poll_uart_status				
+;					JUMP do_adc_reading
+
+ADC_read:			OUT s0, ADC_start_port
+poll_ADC_status:	IN s0, ADC_status_port
 					TEST s0, ADC_new_data
 					JUMP NZ, read_ADC_data
-					JUMP poll_adc_status
-read_ADC_data:		IN	 UART_data, ADC_data_port
-					CALL send_to_UART
-poll_uart_status:	IN s0, UART_status_port
-					TEST s0, tx_data_present
-					JUMP NZ poll_uart_status				
-					JUMP do_adc_reading
+					JUMP poll_ADC_status
+read_ADC_data:		IN ADC_data, ADC_data_port
+					RET
+					
 
+
+send_to_UART_sync:	CALL send_to_UART
+check_UART_status:	IN s0, UART_status_port
+					TEST s0, done_sending
+					JUMP Z, check_UART_status
+					RET
+					
 
 ; Read one character from the UART
 ; 
