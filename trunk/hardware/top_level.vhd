@@ -98,7 +98,7 @@ architecture Behavioral of top_level is
                  reset_buffer : in std_logic;
                  en_16_x_baud : in std_logic;
                    serial_out : out std_logic;
-						 buffer_has_data : out std_logic;
+						 done_sending : out std_logic;
                   buffer_full : out std_logic;
              buffer_half_full : out std_logic;
                           clk : in std_logic);
@@ -176,7 +176,7 @@ signal uart_status_port : std_logic_vector(7 downto 0);
 signal          baud_count : integer range 0 to 127 :=0;
 signal        en_16_x_baud : std_logic;
 signal       write_to_uart : std_logic;
-signal				 tx_data_present : std_logic;
+signal		 done_sending : std_logic;
 signal             tx_full : std_logic;
 signal        tx_half_full : std_logic;
 signal      read_from_uart : std_logic;
@@ -206,7 +206,7 @@ signal led_internal : std_logic_vector(7 downto 0) := (others => '0');
 --
 signal adc_data_ack : std_logic := '0';
 signal adc_new_data : std_logic;
-signal adc_new_data_slow_domain : std_logic;
+--signal adc_new_data_slow_domain : std_logic;
 signal adc_start_capture : std_logic := '0';
 
 
@@ -271,10 +271,10 @@ begin
 		end if;
 	 end process;
 	 
-	 converter1: slow_to_fast_domain_converter
-    Port map( fast_signal => adc_new_data,
-           target_domain_clk => clk55MHz,
-           slow_signal => adc_new_data_slow_domain);
+--	 converter1: slow_to_fast_domain_converter
+--    Port map( fast_signal => adc_new_data,
+--           target_domain_clk => clk55MHz,
+--           slow_signal => adc_new_data_slow_domain);
 
 	 
   --
@@ -286,7 +286,7 @@ begin
   -- UART FIFO status signals to form a bus
   --
 
-  uart_status_port <= "00" & tx_data_present & rx_data_present & rx_full & rx_half_full & tx_full & tx_half_full ;
+  uart_status_port <= "00" & done_sending & rx_data_present & rx_full & rx_half_full & tx_full & tx_half_full ;
 
   --
   -- The inputs connect via a pipelined multiplexer
@@ -412,7 +412,7 @@ begin
                    reset_buffer => uart_reset,
                    en_16_x_baud => en_16_x_baud,
                      serial_out => tx,
-							buffer_has_data => tx_data_present,
+							done_sending => done_sending,
                     buffer_full => tx_full,
                buffer_half_full => tx_half_full,
                             clk => clk55MHz );
@@ -439,7 +439,7 @@ begin
            adc_start => adc_start,
            adc_end_of_conversion => adc_end_of_conversion,
 			
-			  new_data => adc_new_data_slow_domain,
+			  new_data => adc_new_data,
 			  data_ack => adc_data_ack);
   
  --
