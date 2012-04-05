@@ -291,6 +291,9 @@ begin
 			
 			when "10" =>
 				in_port <= adc_data;
+				
+			when "11" =>
+				in_port <= "0000000" & adc_new_data;
         
         -- Don't care used for all other addresses to ensure minimum logic implementation
         when others =>    in_port <= "XXXXXXXX";  
