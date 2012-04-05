@@ -67,6 +67,7 @@ ARCHITECTURE behavior OF top_level_tb IS
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
+	constant adc_clk_period : time := 2 us;
  
 BEGIN
  
@@ -97,13 +98,16 @@ BEGIN
    stim_proc: process
    begin		
       -- hold reset state for 100 ns.
-      wait for 100 ns;	
-
-      wait for clk_period*10;
-
-      -- insert stimulus here 
+      wait until adc_start = '1';
+		wait until adc_start = '0';
+		wait for 2*adc_clk_period;
+		adc_end_of_conversion <= '1';
+		wait for adc_clk_period;
+		adc_end_of_conversion <= '0';
 
       wait;
    end process;
+	
+	
 
 END;
