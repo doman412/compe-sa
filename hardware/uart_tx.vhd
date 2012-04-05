@@ -104,6 +104,7 @@ entity uart_tx is
                  reset_buffer : in std_logic;
                  en_16_x_baud : in std_logic;
                    serial_out : out std_logic;
+						 buffer_has_data: out std_logic;
                   buffer_full : out std_logic;
              buffer_half_full : out std_logic;
                           clk : in std_logic);
@@ -182,8 +183,13 @@ begin
                  half_full => buffer_half_full,
               data_present => fifo_data_present,
                        clk => clk);
+							  
+							  
+	buffer_has_data <= fifo_data_present;
 
 end macro_level_definition;
+
+
 
 -------------------------------------------------------------------------------------------
 --
