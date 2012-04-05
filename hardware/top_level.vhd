@@ -145,6 +145,12 @@ component adc_controller is
 			  new_data : out std_logic;
 			  data_ack : in std_logic);
 end component;
+
+component slow_to_fast_domain_converter is
+    Port ( fast_signal : out  STD_LOGIC;
+           target_domain_clk : in  STD_LOGIC;
+           slow_signal : in  STD_LOGIC);
+end component;
 ------------------------------------------------------------------------------------
 --
 -- Signals used to connect KCPSM3 to program ROM and I/O logic
@@ -198,7 +204,10 @@ signal led_internal : std_logic_vector(7 downto 0) := (others => '0');
 --
 signal adc_data_ack : std_logic := '0';
 signal adc_new_data : std_logic;
+signal adc_new_data_slow_domain : std_logic;
 signal adc_start_capture : std_logic := '0';
+
+
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --
@@ -259,6 +268,12 @@ begin
 			clk500KHz <= '1';
 		end if;
 	 end process;
+	 
+	 converter1: slow_to_fast_domain_converter
+    Port map( fast_signal => adc_new_data,
+           target_domain_clk => clk55MHz,
+           slow_signal => adc_new_data_slow_domain);
+
 	 
   --
   ----------------------------------------------------------------------------------------------------------------------------------
@@ -421,7 +436,7 @@ begin
            adc_start => adc_start,
            adc_end_of_conversion => adc_end_of_conversion,
 			
-			  new_data => adc_new_data,
+			  new_data => adc_new_data_slow_domain,
 			  data_ack => adc_data_ack);
   
  --
