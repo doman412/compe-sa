@@ -325,6 +325,8 @@ begin
 		--Defaults
 		write_to_uart <= '0';
 		uart_reset <= '0';
+		adc_start_capture <= '0';
+		
 		if write_strobe = '1' then
 			case port_id(1 downto 0) is
 				when "00" =>
@@ -335,6 +337,9 @@ begin
 					write_to_uart <= '1';
 				when "10" =>
 					led_internal <= out_port;
+					
+				when "11" =>
+					adc_start_capture <= '1';
 				when others =>
 					-- Do nothing
 			end case;
