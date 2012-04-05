@@ -11,16 +11,17 @@ Serial myPort;
 
 int portCount = -1;
 int totalPorts = 0;
-int graphTop = 200;
+int graphTop = 175;
 int graphBottom = 575;
 int baudRate = 9600;
-int x=1,y=graphBottom-20;
+int x=20,y=graphBottom-20;
 int sampleNumber;
 int systemMode;
 int sysStatus;
 int startByte;
-int repRT = 0x01;
-int repNRT = 0x02;
+int stopByte = 0x71;
+int repRT = 0x41;
+int repNRT = 0x42;
 
 static final int STATUS_WAITING = 1;
 static final int STATUS_SENDING = 2;
@@ -29,7 +30,7 @@ static final int STATUS_RECEIVING = 3;
 static final int MODE_RT = 1;
 static final int MODE_NRT = 2;
 
-static final int REC_BYTE = 12;
+static final int REC_BYTE = 0x71;
 
 char iSignalOk;
 
@@ -138,8 +139,7 @@ void draw(){
   // disp number of samples
   fill(0, 0, 0);
   textFont(font,25);
-  text("Number of Samples: "+sampleNumber, 199,graphTop-100);
-  
+  text("Number of Samples: "+sampleNumber, 199, 100);
   
   
   // draw a line at bottom
@@ -150,12 +150,16 @@ void draw(){
   line(0, graphTop, width, graphTop);
   // line for upper separation;
   line(175, 0, 175, graphTop);
+  // line for graphcenterline
+  stroke(255,141,0);
+  line(0,map(127,0,255,graphBottom-10,graphTop+10),width,map(127,0,255,graphBottom-10,graphTop+10));
+  line(20,graphTop+1,20,graphBottom-1);
   
   // pixles
   if(going){
     if(systemMode == MODE_RT){
-      for(int i=0; i<yvals.size(); i++){
-        set(i,(Integer)yvals.get(i),color(255,0,0));
+      for(int i=20; i<20+yvals.size(); i++){
+        set(i,(Integer)yvals.get(i-20),color(255,0,0));
       }
     } else {
       
@@ -244,6 +248,14 @@ public void goButton(int theValue){
       goButton.setColorActive(color(0,255,0));
       goButton.setColorForeground(color(0,255,0));
     }
+  } else {
+    myPort.write(stopByte);
+    going = false;
+    sysStatus = STATUS_WAITING;
+    systemStatus = "Waiting...";
+    goButton.setColorBackground(color(255,0,0));
+    goButton.setColorActive(color(255,0,0));
+    goButton.setColorForeground(color(255,0,0));
   }
 }
 
@@ -272,17 +284,19 @@ public void serialEvent(Serial port){
   int inInt = port.read();
   char inByte = (char)inInt;
   println("serial data: " + inInt); 
+  println("sysStatus: "+sysStatus);
   float tempY; 
   
   if(sysStatus == STATUS_RECEIVING){
     if(systemMode == MODE_RT){
-      tempY = map(inInt, 0, 255, graphBottom-20, graphBottom-275);
+      tempY = map(inInt, 0, 255, graphBottom-10, graphTop+10);
       y = (int)tempY;
       x++;
       if(x>width-2){
-        x = 0;
+        x = 20;
         yvals = new ArrayList();
       }
+      println(x);
       yvals.add(new Integer(y));
     } else if(systemMode == MODE_NRT){
       // recieved the first zero
@@ -290,15 +304,18 @@ public void serialEvent(Serial port){
         
       } else if(inInt == 0) {
         gotZero=true;
-        systemStatus = "Collecting";
+        println("got zero: "+inInt);
       }
     }
   } else if(sysStatus == STATUS_SENDING){
     
   } else if(sysStatus == STATUS_WAITING){
+    println("waiting...");
     // recieved ack byte
     if(inInt == REC_BYTE){
       sysStatus = STATUS_RECEIVING;
+      println("received REC_BYTE: "+REC_BYTE);
+      systemStatus = "Collecting...";
     }
   }
   
