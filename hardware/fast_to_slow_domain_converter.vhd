@@ -90,7 +90,11 @@ begin
 					next_state <= low_detected;
 				end if;
 			when rise_detected =>
-				next_state <= nothing_detected;
+				if stretched_synced = '0' then
+					next_state <= low_detected;
+				else
+					next_state <= nothing_detected;
+				end if;
 			when others =>
 				next_state <= nothing_detected;
 		end case;
