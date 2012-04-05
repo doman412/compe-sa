@@ -48,7 +48,8 @@ ARCHITECTURE behavior OF top_level_tb IS
 				 adc_start : out std_logic;
 				 adc_address_latch_enable : out std_logic;
 				 adc_output_enable : out std_logic;
-				 adc_end_of_conversion : in std_logic);
+				 adc_end_of_conversion : in std_logic;
+				 adc_data : in std_logic_vector(7 downto 0));
     end component;
     
 
@@ -56,6 +57,7 @@ ARCHITECTURE behavior OF top_level_tb IS
    signal rx : std_logic := '1';
    signal clk : std_logic := '0';
 	signal adc_end_of_conversion : std_logic := '0';
+	signal adc_data : std_logic_vector(7 downto 0);
 
  	--Outputs
    signal tx : std_logic;
@@ -81,7 +83,8 @@ BEGIN
 			 adc_start => adc_start,
 			 adc_address_latch_enable => adc_address_latch_enable,
 			 adc_output_enable => adc_output_enable,
-			 adc_end_of_conversion => adc_end_of_conversion
+			 adc_end_of_conversion => adc_end_of_conversion,
+			 adc_data => adc_data
         );
 
    -- Clock process definitions
@@ -96,14 +99,20 @@ BEGIN
 
    -- Stimulus process
    stim_proc: process
-   begin		
+   begin
+		adc_data <= x"AA";
       -- hold reset state for 100 ns.
       wait until adc_start = '1';
 		wait until adc_start = '0';
 		wait for 2*adc_clk_period;
 		adc_end_of_conversion <= '1';
-		wait for adc_clk_period;
-		adc_end_of_conversion <= '0';
+--		wait until adc_start = '1';
+--		wait until adc_start = '0';
+--		wait for adc_clk_period;
+--		adc_end_of_conversion <= '0';
+--		wait for 2*adc_clk_period;
+		
+		
 
       wait;
    end process;
