@@ -14,7 +14,8 @@ int totalPorts = 0;
 int graphTop = 175;
 int graphBottom = 575;
 int baudRate = 9600;
-int x=20,y=graphBottom-20;
+int y=graphBottom-20;
+float x = 20.0;
 int sampleNumber;
 int systemMode;
 int sysStatus;
@@ -22,6 +23,7 @@ int startByte;
 int stopByte = 0x71;
 int repRT = 0x41;
 int repNRT = 0x42;
+int scaling = 4;
 
 static final int STATUS_WAITING = 1;
 static final int STATUS_SENDING = 2;
@@ -140,6 +142,10 @@ void draw(){
   fill(0, 0, 0);
   textFont(font,25);
   text("Number of Samples: "+sampleNumber, 199, 100);
+  // disp numbers on graph
+  textFont(font,10);
+  text("2.5",0,map(255,0,255,graphBottom-10,graphTop+10)+3);
+  text("-2.5",0,map(-5,0,255,graphBottom-10,graphTop+10)+3);
   
   
   // draw a line at bottom
@@ -154,12 +160,15 @@ void draw(){
   stroke(255,141,0);
   line(0,map(127,0,255,graphBottom-10,graphTop+10),width,map(127,0,255,graphBottom-10,graphTop+10));
   line(20,graphTop+1,20,graphBottom-1);
+  line(15,map(255,0,255,graphBottom-10,graphTop+10),25,map(255,0,255,graphBottom-10,graphTop+10));
+  line(15,map(0,0,255,graphBottom-10,graphTop+10),25,map(0,0,255,graphBottom-10,graphTop+10));
+  
   
   // pixles
   if(going){
     if(systemMode == MODE_RT){
-      for(int i=20; i<20+yvals.size(); i++){
-        set(i,(Integer)yvals.get(i-20),color(255,0,0));
+      for(int i=0; i<+yvals.size(); i+=scaling){
+        set(20+int(i/scaling),(Integer)yvals.get(i),color(255,0,0));
       }
     } else {
       
@@ -283,20 +292,21 @@ public void nonRealTimeButton(int theValue){
 public void serialEvent(Serial port){
   int inInt = port.read();
   char inByte = (char)inInt;
-  println("serial data: " + inInt); 
-  println("sysStatus: "+sysStatus);
+  println("serial data: " + inInt);
   float tempY; 
   
   if(sysStatus == STATUS_RECEIVING){
     if(systemMode == MODE_RT){
       tempY = map(inInt, 0, 255, graphBottom-10, graphTop+10);
       y = (int)tempY;
-      x++;
-      if(x>width-2){
-        x = 20;
+      x+=1.0;
+      if(int(x) > width*scaling){
+        x = 20.0;
         yvals = new ArrayList();
+        
       }
       println(x);
+//      set(int(x),y,color(255,0,0));
       yvals.add(new Integer(y));
     } else if(systemMode == MODE_NRT){
       // recieved the first zero
