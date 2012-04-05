@@ -54,13 +54,14 @@ store_pointer       EQU       sE                  ; used to pass location of dat
 cold_start:                                       ; initialization
                     EINT                          ; enable the interrupts
 					OUT	 s0, UART_reset_port	  ; doesn't matter what we write
-;					OUT	 s0, ADC_start_port		  ; doesn't matter here either
-;poll_adc_status:	IN	 s0, ADC_status_port
-;					TEST s0, ADC_new_data
-;					JUMP NZ, read_ADC_data
-;					JUMP poll_adc_status
-;read_ADC_data:		IN s0, ADC_data_port
-;					OUT s0, LED_port
+do_adc_reading:		OUT	 s0, ADC_start_port		  ; doesn't matter here either
+poll_adc_status:	IN	 s0, ADC_status_port
+					TEST s0, ADC_new_data
+					JUMP NZ, read_ADC_data
+					JUMP poll_adc_status
+read_ADC_data:		IN s0, ADC_data_port
+					OUT s0, LED_port
+					JUMP do_adc_reading
 main_loop:			CALL      read_from_UART
                     JUMP      main_loop
 
