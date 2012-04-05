@@ -54,7 +54,8 @@ entity top_level is
 				 adc_start : out std_logic;
 				 adc_address_latch_enable : out std_logic;
 				 adc_output_enable : out std_logic;
-				 adc_end_of_conversion : in std_logic);
+				 adc_end_of_conversion : in std_logic;
+				 adc_data : in std_logic);
     end top_level;
 --
 ------------------------------------------------------------------------------------
@@ -278,19 +279,15 @@ begin
   begin
     if clk55MHz'event and clk55MHz='1' then
 	 
-		-- Defaults
-		read_from_uart <= '0';
-
-      case port_id(0) is
+		case port_id(1 downto 0) is
 
         
         -- read UART status at address 00 hex
-        when '0' =>    in_port <= uart_status_port;
+        when "00" =>    in_port <= uart_status_port;
 
         -- read UART receive data at address 01 hex
-        when '1' =>    
+        when "01" =>    
 			in_port <= rx_data;
-			read_from_uart <= '1';
         
         -- Don't care used for all other addresses to ensure minimum logic implementation
         when others =>    in_port <= "XXXXXXXX";  
