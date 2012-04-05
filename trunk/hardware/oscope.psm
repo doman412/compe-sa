@@ -55,23 +55,16 @@ ADC_data			EQU		  sD				  ; used for UART data
 ; 
 ; 
 cold_start:                                       ; initialization
-                    EINT                          ; enable the interrupts
-					OUT	 s0, UART_reset_port	  ; doesn't matter what we write
-main_loop:			CALL ADC_read
+                   	OUT	 s0, UART_reset_port	  ; doesn't matter what we write
+main_loop:			CALL read_and_send_one
+					JUMP main_loop
+
+
+
+read_and_send_one: 	CALL ADC_read
 					LOAD UART_data, ADC_data
 					CALL send_to_UART_sync
-					JUMP main_loop
-;do_adc_reading:		OUT	 s0, ADC_start_port		  ; doesn't matter here either
-;poll_adc_status:	IN	 s0, ADC_status_port
-;					TEST s0, ADC_new_data
-;					JUMP NZ, read_ADC_data
-;					JUMP poll_adc_status
-;read_ADC_data:		IN	 UART_data, ADC_data_port
-;					CALL send_to_UART
-;poll_uart_status:	IN s0, UART_status_port
-;					TEST s0, tx_data_present
-;					JUMP NZ poll_uart_status				
-;					JUMP do_adc_reading
+					RET
 
 ADC_read:			OUT s0, ADC_start_port
 poll_ADC_status:	IN s0, ADC_status_port
